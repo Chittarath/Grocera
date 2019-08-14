@@ -1,0 +1,114 @@
+<resources>
+    <string name="app_name">Grocera</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+    
+    <string-array name="fruits_and_vegetables">
+        <item>Fresh Vegetables</item>
+        <item>Fresh Fruits</item>
+        <item>Herbs and Seasoning</item>
+    </string-array>
+
+    <string-array name="foodgrains">
+        <item>Atta, Flours and Souji</item>
+        <item>Rice and Rice Products</item>
+        <item>Dal and Pulses</item>
+        <item>Salt, Sugar and Jaggery</item>
+        <item>Edible oils and ghee</item>
+        <item>Masala and Spices</item>
+        <item>Dry Fruits</item>
+    </string-array>
+
+    <string-array name="bakery">
+        <item>Dairy</item>
+        <item>Breads and Buns</item>
+        <item>Cookies, Rusk and Khari</item>
+        <item>Ice creams and Deserts</item>
+        <item>Cakes and Pastries</item>
+        <item>Bakery Snacks</item>
+    </string-array>
+
+    <string-array name="snacks">
+        <item>Breakfast Cereals</item>
+        <item>Noodles and Pasta</item>
+        <item>Biscuits and Cookies</item>
+        <item>Frozen Veggies and Snacks</item>
+        <item>Snacks, Sauces and Ketchup</item>
+        <item>Ready to cook and eat</item>
+        <item>Chocolate and Candies</item>
+        <item>Pickels and Candies</item>
+        <item>Indian Sweets</item>
+    </string-array>
+
+    <string-array name="beauty">
+        <item>Oral Care</item>
+        <item>Feminine Hygiene</item>
+        <item>Bath and Hand Wash</item>
+        <item>Health and Medicine</item>
+        <item>Men Grooming</item>
+        <item>Skin Care</item>
+        <item>Fragrences and Deos</item>
+        <item>Make up</item>
+    </string-array>
+
+    <string-array name="cleaning">
+        <item>Detergents and Dishwash</item>
+        <item>All Purpose Cleaners</item>
+        <item>Disposable, Garbage Bags</item>
+        <item>Freshners and Repellents</item>
+        <item>Mops, Brushes and Scrubs</item>
+        <item>Bins and Bathroom Ware</item>
+        <item>Pooja Needs</item>
+        <item>Party and Festive Needs</item>
+        <item>Car and Show Care</item>
+        <item>Stationary</item>
+    </string-array>
+
+    <string-array name="kitchen">
+        <item>Pet Food and Accessories</item>
+        <item>Cookware and Non stick</item>
+        <item>Appliances and Electricals</item>
+        <item>Steel Utensils</item>
+        <item>Kitchen Accessories</item>
+        <item>Storage Accessories</item>
+        <item>Bakeware</item>
+        <item>Gardening</item>
+    </string-array>
+
+    <string-array name="eggs">
+        <item>Eggs</item>
+        <item>Marinades</item>
+        <item>Poultry</item>
+        <item>Mutton and Lamb</item>
+        <item>Fish and Seafood</item>
+        <item>Pork</item>
+    </string-array>
+
+    <string-array name="baby_care">
+        <item>Baby Food and Formula</item>
+        <item>Diapers and Wipes</item>
+        <item>Baby Bath and Hygiene</item>
+        <item>Mothers and Maternity</item>
+        <item>Feeding and Nursing</item>
+        <item>Baby Accessories</item>
+    </string-array>
+</resources>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

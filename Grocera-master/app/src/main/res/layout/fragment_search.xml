@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="22sp"
+        android:textStyle="bold"
+        android:layout_margin="12dp"
+        android:textColor="@android:color/black"
+        android:text="Explore"
+        android:visibility="gone"/>
+
+    <SearchView
+        android:id="@+id/fragment_search_search_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:background="@drawable/rounded_box"
+        android:clickable="true"
+        android:focusable="true"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/show_stores"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Stores"
+            android:textSize="18sp"
+            android:textColor="@color/colorPrimary"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="4dp"/>
+
+        <TextView
+            android:id="@+id/show_products"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Products"
+            android:textSize="18sp"
+            android:textColor="@android:color/black"
+            android:layout_marginStart="4dp"
+            android:layout_marginEnd="8dp"/>
+
+    </LinearLayout>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/search_fragment_shop_recycler"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:listitem="@layout/home_activity_item"
+        android:visibility="visible"/>
+    
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/search_fragment_product_recycler"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:listitem="@layout/product_search_item"
+        android:visibility="gone"/>
+</LinearLayout>

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:layout_marginStart="12dp"
+    android:layout_marginEnd="12dp">
+
+    <TextView
+        android:id="@+id/ordered_item_name_tv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Product x 1"
+        android:textColor="@android:color/black"
+        android:layout_weight="1"/>
+
+    <TextView
+        android:id="@+id/ordered_item_cost_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Rs.250.00"
+        android:paddingStart="12dp"
+        android:paddingEnd="12dp"
+        android:textColor="@android:color/black"
+        android:inputType="numberDecimal"
+        android:layout_marginBottom="8dp"/>
+
+</LinearLayout>
