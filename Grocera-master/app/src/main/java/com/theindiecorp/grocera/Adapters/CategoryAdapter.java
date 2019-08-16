@@ -9,8 +9,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 import com.theindiecorp.grocera.Data.ProductDetails;
 import com.theindiecorp.grocera.R;
 
@@ -56,14 +60,34 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.MyView
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int listPosition) {
-        String category = dataSet.get(listPosition);
+        final String category = dataSet.get(listPosition);
 
-        holder.recyclerView.setLayoutManager(new LinearLayoutManager(context));
-        ShopViewAdapter shopViewAdapter = new ShopViewAdapter(new ArrayList<ProductDetails>(),context);
-        ArrayList<ProductDetails> productDetails = new ArrayList<>();
+        holder.recyclerView.setLayoutManager(new LinearLayoutManager(context,LinearLayoutManager.HORIZONTAL,false));
+        final ShopViewAdapter shopViewAdapter = new ShopViewAdapter(new ArrayList<ProductDetails>(),context);
+        final ArrayList<ProductDetails> productDetails = new ArrayList<>();
         holder.recyclerView.setAdapter(shopViewAdapter);
 
+        Query query = databaseReference.child("productDetails");
+        query.orderByChild("shopId").equalTo(shopId).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if(dataSnapshot.exists()){
+                    for(DataSnapshot snapshot : dataSnapshot.getChildren()){
+                        ProductDetails p = snapshot.getValue(ProductDetails.class);
+                        if(p.getCategory().equals(category)){
+                            productDetails.add(p);
+                        }
+                    }
+                    shopViewAdapter.setProducts(productDetails);
+                    shopViewAdapter.notifyDataSetChanged();
+                }
+            }
 
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
 
         holder.title.setText(category);
     }

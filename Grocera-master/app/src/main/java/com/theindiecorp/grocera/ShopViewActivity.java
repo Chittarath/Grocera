@@ -21,6 +21,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
+import com.theindiecorp.grocera.Adapters.CategoryAdapter;
 import com.theindiecorp.grocera.Adapters.ShopViewAdapter;
 import com.theindiecorp.grocera.Data.ProductDetails;
 
@@ -41,6 +42,11 @@ public class ShopViewActivity extends AppCompatActivity {
         final TextView shopName = findViewById(R.id.shop_name);
         final ImageView profilePic = findViewById(R.id.shop_image);
         final TextView discountTxt = findViewById(R.id.discount_txt);
+        RecyclerView recyclerView = findViewById(R.id.recycler);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+        final CategoryAdapter categoryAdapter = new CategoryAdapter(this,shopId,new ArrayList<String>());
+        recyclerView.setAdapter(categoryAdapter);
 
         databaseReference.child("shopDetails").child(shopId).addValueEventListener(new ValueEventListener() {
             @Override
@@ -49,6 +55,27 @@ public class ShopViewActivity extends AppCompatActivity {
                 if(dataSnapshot.child("discount").exists()){
                     discountTxt.setText(dataSnapshot.child("discount").getValue(Double.class) + "% OFF");
                 }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+        Query query = databaseReference.child("productDetails");
+        query.orderByChild("shopId").equalTo(shopId).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                ArrayList<String> categories = new ArrayList<>();
+                for(DataSnapshot snapshot : dataSnapshot.getChildren()){
+                    ProductDetails p = snapshot.getValue(ProductDetails.class);
+                    if(p.getCategory()!=null){
+                        categories.add(p.getCategory());
+                    }
+                }
+                categoryAdapter.setCategories(categories);
+                categoryAdapter.notifyDataSetChanged();
             }
 
             @Override

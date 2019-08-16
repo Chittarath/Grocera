@@ -1,6 +1,7 @@
 package com.theindiecorp.grocera.Fragments;
 
 import android.Manifest;
+import android.content.Context;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.os.Bundle;
@@ -15,6 +16,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
+import android.widget.PopupWindow;
 import android.widget.TextView;
 
 import com.google.android.gms.location.FusedLocationProviderClient;
@@ -48,6 +51,13 @@ public class MainFeedFragment extends Fragment {
     private static final String COARSE_LOCATION = Manifest.permission.ACCESS_COARSE_LOCATION;
     private Boolean locationPermissionsGranted = false;
     private static final int LOCATION_PERMISSION_REQUEST_CODE = 1234;
+    Context mContext;
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        mContext = context;
+    }
 
     @Nullable
     @Override
@@ -55,6 +65,22 @@ public class MainFeedFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_main_feed,null);
 
         final TextView emptyHomeScreentxt = view.findViewById(R.id.emptyHomeScreenText);
+        final TextView numberOfStores = view.findViewById(R.id.garages_near_you);
+
+        LayoutInflater popupInflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        final View popupView = popupInflater.inflate(R.layout.pop_up_sort, null);
+        int width = LinearLayout.LayoutParams.WRAP_CONTENT;
+        int height = LinearLayout.LayoutParams.WRAP_CONTENT;
+        final PopupWindow popupWindow = new PopupWindow(popupView, width, height, true);
+
+        final TextView sort = view.findViewById(R.id.sort_text_view);
+
+        sort.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                popupWindow.showAsDropDown(sort);
+            }
+        });
 
         RecyclerView recyclerView = view.findViewById(R.id.home_main_feed_recycler);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
@@ -116,6 +142,7 @@ public class MainFeedFragment extends Fragment {
                 adapter.notifyDataSetChanged();
                 offersListAdapter.setShopIds(shopIds);
                 offersListAdapter.notifyDataSetChanged();
+                numberOfStores.setText(shopDetails.size() + " Stores Near You");
             }
 
             @Override
