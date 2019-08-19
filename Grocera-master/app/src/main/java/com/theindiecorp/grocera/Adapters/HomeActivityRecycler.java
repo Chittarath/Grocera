@@ -99,14 +99,15 @@ public class HomeActivityRecycler extends RecyclerView.Adapter<HomeActivityRecyc
             }
         });
 
-        float eta;
+        float eta = 0;
         if(shopDetails.getLat() != null && shopDetails.getLng() != null){
             Location mechLocation = new Location("");
             mechLocation.setLatitude(shopDetails.getLat());
             mechLocation.setLongitude(shopDetails.getLng());
-            eta = MainFeedFragment.currentLocation.distanceTo(mechLocation);
-            eta = eta / 40;
-
+            if(MainFeedFragment.currentLocation != null){
+                eta = MainFeedFragment.currentLocation.distanceTo(mechLocation);
+                eta = eta / 40;
+            }
             if(eta < 75)
                 holder.distance.setText(eta + " minutes away");
         }
