@@ -15,9 +15,10 @@
 
         <Button
             android:id="@+id/go_back_btn"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:background="@drawable/go_back_left_arrow"/>
+            android:layout_width="22dp"
+            android:layout_height="22dp"
+            android:background="@drawable/go_back_left_arrow"
+            android:layout_margin="8dp"/>
 
         <ImageView
             android:id="@+id/shop_image"
@@ -135,10 +136,12 @@
         </LinearLayout>
 
         <android.support.v7.widget.RecyclerView
-            android:id="@+id/recycler"
-            android:layout_width="match_parent"
+            android:id="@+id/shop_view_recycler"
+            android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            tools:listitem="@layout/category_item"/>
+            android:scrollbars="horizontal"
+            tools:listitem="@layout/shop_view_item"
+            android:layout_gravity="center" />
 
     </LinearLayout>
 
