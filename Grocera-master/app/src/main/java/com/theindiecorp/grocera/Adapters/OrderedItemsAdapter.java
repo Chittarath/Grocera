@@ -58,7 +58,7 @@ public class OrderedItemsAdapter extends RecyclerView.Adapter<OrderedItemsAdapte
     public void onBindViewHolder(@NonNull final MyViewHolder holder, int listPosition) {
         final CartDetails cart = dataSet.get(listPosition);
 
-        databaseReference.child("productDetails").child(cart.getShopId()).child(cart.getProductId()).addValueEventListener(new ValueEventListener() {
+        databaseReference.child("productDetails").child(cart.getProductId()).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 holder.itemName.setText(dataSnapshot.child("name").getValue(String.class) + " x" + cart.getQuantity());

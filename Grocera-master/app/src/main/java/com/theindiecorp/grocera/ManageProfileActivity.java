@@ -114,6 +114,14 @@ public class ManageProfileActivity extends AppCompatActivity {
             }
         });
 
+        Button goBackBtn = findViewById(R.id.go_back_btn);
+        goBackBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(ManageProfileActivity.this,MainActivity.class));
+            }
+        });
+
     }
     private void verifySignInCode() {
         String code = otpEt.getText().toString();

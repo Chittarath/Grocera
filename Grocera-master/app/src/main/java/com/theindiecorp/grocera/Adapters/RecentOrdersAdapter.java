@@ -87,7 +87,7 @@ public class RecentOrdersAdapter extends RecyclerView.Adapter<RecentOrdersAdapte
 
         for(int i=0;i < orderDetails.getCart().size();i++){
             final CartDetails c = orderDetails.getCart().get(i);
-            databaseReference.child("productDetails").child(c.getShopId()).child(c.getProductId()).addValueEventListener(new ValueEventListener() {
+            databaseReference.child("productDetails").child(c.getProductId()).addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                     holder.items.setText(holder.items.getText() + dataSnapshot.child("name").getValue(String.class) + "x" + c.getQuantity() + ", ");

@@ -59,7 +59,7 @@ public class ShopViewActivity extends AppCompatActivity {
         });
 
         RecyclerView recyclerView = findViewById(R.id.shop_view_recycler);
-        recyclerView.setLayoutManager(new GridLayoutManager(this,2));
+        recyclerView.setLayoutManager(new GridLayoutManager(this,3));
 
         productDetails = new ArrayList<>();
 
