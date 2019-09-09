@@ -77,21 +77,4 @@ public class MainActivity extends AppCompatActivity {
         loadFragment(new MainFeedFragment());
 
     }
-
-    private void sendRegistrationToServer(String token) {
-        Log.d(TAG, "sendRegistrationToServer: sending token to server: " + token);
-        DatabaseReference reference = FirebaseDatabase.getInstance().getReference();
-        reference.child(getString(R.string.dbnode_users))
-                .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
-                .child(getString(R.string.field_messaging_token))
-                .setValue(token);
-    }
-
-
-    private void initFCM(){
-        String token = FirebaseInstanceId.getInstance().getToken();
-        Log.d(TAG, "initFCM: token: " + token);
-        sendRegistrationToServer(token);
-
-    }
 }
