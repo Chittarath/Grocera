@@ -2,6 +2,7 @@ package com.theindiecorp.grocera;
 
 import android.Manifest;
 import android.app.Activity;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.os.Bundle;
@@ -19,6 +20,10 @@ import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.iid.FirebaseInstanceId;
 import com.theindiecorp.grocera.Data.ProductDetails;
 import com.theindiecorp.grocera.Data.ShopDetails;
 import com.theindiecorp.grocera.Fragments.CartFragment;
@@ -29,6 +34,14 @@ import com.theindiecorp.grocera.Fragments.SearchFragment;
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
+
+    public static final String TAG = "stupid"; // TODO
+    public static String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
+    public static String userEmail;
+    String eventIdFromIntent = "";
+
+    private static final String USER_ID = "USER_ID";
+    private static final String EDITABLE = "EDITABLE";
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -74,7 +87,34 @@ public class MainActivity extends AppCompatActivity {
         BottomNavigationView navView = findViewById(R.id.nav_view);
         navView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
+        initFCM();
+
+        Intent intent = getIntent();
+        if (intent.hasExtra("intentType")) {
+            if (intent.getStringExtra("intentType").equals("startActivityFromNotification")) {
+                eventIdFromIntent = intent.getStringExtra("link");
+            }
+        }
+
+
         loadFragment(new MainFeedFragment());
+
+    }
+
+    private void sendRegistrationToServer(String token) {
+        Log.d(TAG, "sendRegistrationToServer: sending token to server: " + token);
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference();
+        reference.child("users")
+                .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                .child("messagingToken")
+                .setValue(token);
+    }
+
+
+    private void initFCM(){
+        String token = FirebaseInstanceId.getInstance().getToken();
+        Log.d(TAG, "initFCM: token: " + token);
+        sendRegistrationToServer(token);
 
     }
 }
