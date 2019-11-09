@@ -1,16 +1,25 @@
 package com.theindiecorp.grocera;
 
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.net.Uri;
 import android.support.annotation.NonNull;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -30,6 +39,7 @@ import java.util.ArrayList;
 public class ShopViewActivity extends AppCompatActivity {
 
     ArrayList<ProductDetails> productDetails;
+    ArrayList<String> categories = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +52,23 @@ public class ShopViewActivity extends AppCompatActivity {
         final TextView shopName = findViewById(R.id.shop_name);
         final ImageView profilePic = findViewById(R.id.shop_image);
         final TextView discountTxt = findViewById(R.id.discount_txt);
+        FloatingActionButton fab = findViewById(R.id.fab);
+
+        final View dialogView = LayoutInflater.from(this).inflate(R.layout.filter_fab_dialog, null);
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        final ListView dialogListView = dialogView.findViewById(R.id.list);
+        builder.setView(dialogView);
+
+        ArrayAdapter<String> dialogListAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, categories);
+        dialogListView.setAdapter(dialogListAdapter);
+
+        final AlertDialog dialog = builder.create();
+
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        WindowManager.LayoutParams wmlp = dialog.getWindow().getAttributes();
+
+        wmlp.gravity = Gravity.BOTTOM | Gravity.CENTER_HORIZONTAL;
 
         databaseReference.child("shopDetails").child(shopId).addValueEventListener(new ValueEventListener() {
             @Override
@@ -76,6 +103,10 @@ public class ShopViewActivity extends AppCompatActivity {
                     ProductDetails p = snapshot.getValue(ProductDetails.class);
                     p.setId(snapshot.getKey());
                     productDetails.add(p);
+                    String c = p.getCategory();
+                    if(!categories.contains(c)){
+                        categories.add(c);
+                    }
                 }
                 adapter.setProducts(productDetails  );
                 adapter.notifyDataSetChanged();
@@ -84,6 +115,39 @@ public class ShopViewActivity extends AppCompatActivity {
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
 
+            }
+        });
+
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.show();
+                dialogListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                        String category = categories.get(i);
+                        query.orderByChild("shopId").equalTo(shopId).addValueEventListener(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                productDetails = new ArrayList<>();
+                                for(DataSnapshot snapshot : dataSnapshot.getChildren()){
+                                    ProductDetails p = snapshot.getValue(ProductDetails.class);
+                                    p.setId(snapshot.getKey());
+                                    if(p.getCategory().equals(category)){
+                                        productDetails.add(p);
+                                    }
+                                    adapter.setProducts(productDetails);
+                                    adapter.notifyDataSetChanged();
+                                }
+                            }
+
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                            }
+                        });
+                    }
+                });
             }
         });
 

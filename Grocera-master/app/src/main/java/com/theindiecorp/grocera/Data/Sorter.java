@@ -1,20 +1,20 @@
 package com.theindiecorp.grocera.Data;
 
 public class Sorter {
-    String garageId;
     Float sortingParameter;
+    ShopDetails shopDetails;
 
-    public Sorter(String garageId, Float avgRating) {
-        this.garageId = garageId;
+    public Sorter(ShopDetails shopDetails, Float avgRating) {
+        this.shopDetails = shopDetails;
         this.sortingParameter = avgRating;
     }
 
-    public String getGarageId() {
-        return garageId;
+    public ShopDetails getShopDetails() {
+        return shopDetails;
     }
 
-    public void setGarageId(String garageId) {
-        this.garageId = garageId;
+    public void setShopDetails(ShopDetails shopDetails) {
+        this.shopDetails = shopDetails;
     }
 
     public Float getRating() {

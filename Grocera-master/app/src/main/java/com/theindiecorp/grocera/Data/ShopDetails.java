@@ -4,6 +4,16 @@ public class ShopDetails {
     private String name;
     private String address;
     private float rating;
+
+    public float getDistance() {
+        return distance;
+    }
+
+    public void setDistance(float distance) {
+        this.distance = distance;
+    }
+
+    private float distance;
     private String pinCode;
     private Double lat,lng;
     private String id;
