@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.theindiecorp.grocera.MainActivity"
-    android:background="@android:color/white"
+    android:background="@color/light_orange"
     android:orientation="vertical">
 
     <android.support.v7.widget.RecyclerView
@@ -42,7 +42,8 @@
             android:layout_height="21dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
-            android:src="@drawable/sort"/>
+            android:src="@drawable/sort"
+            android:visibility="gone"/>
 
         <TextView
             android:id="@+id/sort_text_view"
@@ -52,7 +53,8 @@
             android:layout_marginEnd="16dp"
             android:text="Sort/Filter"
             android:textSize="14sp"
-            android:textColor = "@android:color/black" />
+            android:textColor = "@android:color/black"
+            android:visibility="gone"/>
 
     </LinearLayout>
 

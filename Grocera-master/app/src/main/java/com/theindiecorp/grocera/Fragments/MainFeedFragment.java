@@ -211,10 +211,6 @@ public class MainFeedFragment extends Fragment {
                                                 double latitude = dataSnapshot.child("lat").getValue(Double.class);
                                                 double longitude = dataSnapshot.child("lng").getValue(Double.class);
 
-//                                                if(latitude != null && longitude != null){
-//
-//                                                }
-
                                                 Location shopLocation = new Location("provider");
                                                 shopLocation.setLatitude(latitude);
                                                 shopLocation.setLongitude(longitude);
