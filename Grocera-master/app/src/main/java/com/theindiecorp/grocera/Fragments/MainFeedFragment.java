@@ -70,8 +70,6 @@ public class MainFeedFragment extends Fragment {
     private static final int LOCATION_PERMISSION_REQUEST_CODE = 1234;
     Context mContext;
 
-
-
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
@@ -139,6 +137,7 @@ public class MainFeedFragment extends Fragment {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 shopDetails = new ArrayList<>();
+                shopIds = new ArrayList<>();
                 String category;
                 for(DataSnapshot shop : dataSnapshot.getChildren()){
                     ShopDetails s = shop.getValue(ShopDetails.class);
@@ -171,126 +170,6 @@ public class MainFeedFragment extends Fragment {
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
 
-            }
-        });
-
-        nearest.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                //get current location of user
-                getLocationPermission();
-
-
-                if(currentLocation!=null)
-                {
-                    int i,j;
-                    boolean swapped;
-                    for(i=0;i<shopDetails.size();i++){
-                        Location shopLoc = new Location("provider");
-                        if(shopDetails.get(i).getLng()!=null){
-                            shopLoc.setLongitude(shopDetails.get(i).getLng());
-                            shopLoc.setLatitude(shopDetails.get(i).getLat());
-                            Float distance = currentLocation.distanceTo(shopLoc);
-                            shopDetails.get(i).setDistance(distance);
-
-                            swapped = false;
-                            for(j=0;j<shopDetails.size()-i;j++){
-                                Collections.swap(shopDetails,j,j+1);
-                                swapped = true;
-
-                //check if Location Service is enabled
-                LocationManager manager = (LocationManager) mContext.getSystemService(Context.LOCATION_SERVICE);
-                if(!manager.isProviderEnabled(LocationManager.GPS_PROVIDER)){
-                    AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
-                    builder.setTitle("Enable Location Service");
-                    builder.setMessage("You need to enable location service to access this feature");
-                    builder.setNegativeButton("Cancel",null);
-                    builder.setPositiveButton("Enable", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialogInterface, int i) {
-                            startActivity(new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS));
-                        }
-                    });
-                    builder.show();
-                }else{
-                    final ArrayList<Sorter> distances = new ArrayList<>();
-                    for(int i = 0; i<shopDetails.size();i++){
-                        final String currentGarageId = shopDetails.get(i).getId();
-
-                        //get device location
-                        LocationRequest mLocationRequest = LocationRequest.create();
-                        mLocationRequest.setInterval(60000);
-                        mLocationRequest.setFastestInterval(5000);
-                        mLocationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
-                        LocationCallback mLocationCallback = new LocationCallback() {
-                            @Override
-                            public void onLocationResult(LocationResult locationResult) {
-                                if(locationResult == null){
-                                    return;
-                                }
-                                for(Location location : locationResult.getLocations()){
-                                    if(location!=null){
-                                        currentLocation = location;
-
-                                        databaseReference.child("shopDetails").child(currentGarageId).addValueEventListener(new ValueEventListener() {
-                                            @Override
-                                            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                                                double latitude = dataSnapshot.child("lat").getValue(Double.class);
-                                                double longitude = dataSnapshot.child("lng").getValue(Double.class);
-
-                                                Location shopLocation = new Location("provider");
-                                                shopLocation.setLatitude(latitude);
-                                                shopLocation.setLongitude(longitude);
-                                                Float distanceTo = shopLocation.distanceTo(currentLocation);
-
-                                                //Insert distance in sorter order
-                                                if(distances.size() == 0){
-                                                    distances.add(new Sorter(currentGarageId, distanceTo));
-                                                }else{
-                                                    if (distances.get(distances.size() - 1).getRating() <= distanceTo) {
-                                                        distances.add(new Sorter(currentGarageId, distanceTo));
-                                                    } else {
-                                                        int pos = distances.size();
-                                                        while (pos != 0 && (distances.get(pos - 1).getRating() >= distanceTo)) {
-                                                            pos--;
-                                                        }
-                                                        distances.add(pos, new Sorter(currentGarageId, distanceTo));
-                                                    }
-                                                }
-
-                                                temporaryShops.clear();
-                                                //Sort the shops list according to the rating
-                                                //Find the mechanic with distances corresponding to the distances ArrayList
-                                                for(int j=0;j<distances.size();j++){
-                                                    //find the shops
-                                                    for(int k=0; k<shopDetails.size();k++){
-                                                        if(shopDetails.get(k).getId().equals(distances.get(j).getGarageId())){
-                                                            temporaryShops.add(shopDetails.get(k));
-                                                        }
-                                                    }
-                                                }
-
-                                                if(temporaryShops.size() == shopDetails.size()){
-                                                    adapter.setShops(temporaryShops);
-                                                    adapter.notifyDataSetChanged();
-                                                }
-                                            }
-
-                                            @Override
-                                            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                                            }
-                                        });
-                                    }
-                                }
-                            }
-
-                            if(!swapped){
-                                break;
-                            }
-                        }
-                    }
-                }
             }
         });
 

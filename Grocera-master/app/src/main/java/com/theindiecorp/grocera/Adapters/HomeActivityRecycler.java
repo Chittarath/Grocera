@@ -76,6 +76,7 @@ public class HomeActivityRecycler extends RecyclerView.Adapter<HomeActivityRecyc
         final ShopDetails shopDetails = dataSet.get(listPosition);
         holder.shopAddress.setText(shopDetails.getAddress());
         holder.shopName.setText(shopDetails.getName());
+
         if(shopDetails.getStatus().equals("close")){
             holder.itemView.setBackgroundColor(holder.itemView.getResources().getColor(R.color.grey));
         }

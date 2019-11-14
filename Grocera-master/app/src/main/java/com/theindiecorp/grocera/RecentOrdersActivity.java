@@ -32,8 +32,6 @@ public class RecentOrdersActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recent_orders);
 
-        setSupportActionBar((Toolbar) findViewById(R.id.toolbar));
-
         final RecyclerView recentOrdersList = findViewById(R.id.profile_view_past_orders);
         recentOrdersList.setLayoutManager(new LinearLayoutManager(this));
 
