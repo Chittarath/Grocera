@@ -51,6 +51,8 @@ public class OrderViewActivity extends AppCompatActivity {
         payable = findViewById(R.id.order_view_payable_tv);
         deliveryFee = findViewById(R.id.order_view_delivery_fee_tv);
 
+        Toast.makeText(OrderViewActivity.this,orderId,Toast.LENGTH_LONG).show();
+
         RecyclerView itemList = findViewById(R.id.order_view_items_list);
         itemList.setLayoutManager(new LinearLayoutManager(this));
 

@@ -78,17 +78,18 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:layout_marginStart="12dp"
-            android:layout_marginEnd="12dp">
+            android:layout_marginEnd="12dp"
+            android:layout_marginBottom="8dp">
 
             <Button
                 android:id="@+id/recent_order_item_cancel_btn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@drawable/button_background_stroke"
-                android:textColor="@color/colorPrimary"
-                android:text="CANCEL"
                 android:paddingStart="50dp"
-                android:paddingEnd="50dp"/>
+                android:paddingEnd="50dp"
+                android:text="CANCEL"
+                android:textColor="@color/colorPrimary" />
 
             <Button
                 android:id="@+id/recent_order_item_reorder_btn"
