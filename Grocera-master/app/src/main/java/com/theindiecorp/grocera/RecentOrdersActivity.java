@@ -21,6 +21,7 @@ import com.theindiecorp.grocera.Adapters.RecentOrdersAdapter;
 import com.theindiecorp.grocera.Data.OrderDetails;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class RecentOrdersActivity extends AppCompatActivity {
 
@@ -51,6 +52,7 @@ public class RecentOrdersActivity extends AppCompatActivity {
                         o.setOrderId(snapshot.getKey());
                         orderDetails.add(o);
                     }
+                    Collections.reverse(orderDetails);
                     recentOrdersAdapter.setOrders(orderDetails);
                     recentOrdersAdapter.notifyDataSetChanged();
                 }

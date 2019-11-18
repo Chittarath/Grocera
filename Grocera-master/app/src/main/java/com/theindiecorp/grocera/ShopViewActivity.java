@@ -75,7 +75,7 @@ public class ShopViewActivity extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 shopName.setText(dataSnapshot.child("name").getValue(String.class));
                 if(dataSnapshot.child("discount").exists()){
-                    discountTxt.setText(dataSnapshot.child("discount").getValue(Double.class) + "% OFF");
+                    discountTxt.setText(Math.round(dataSnapshot.child("discount").getValue(Double.class)) + "% OFF");
                 }
             }
 

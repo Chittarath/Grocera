@@ -35,13 +35,14 @@ public class OffersListAdapter extends RecyclerView.Adapter<OffersListAdapter.My
     }
 
     public static class MyViewHolder extends RecyclerView.ViewHolder{
-        private TextView offerTxt;
+        private TextView offerTxt, nameTxt;
         private ImageView shopImg;
 
         public MyViewHolder(View itemView){
             super(itemView);
             this.offerTxt = itemView.findViewById(R.id.offer_text);
             this.shopImg = itemView.findViewById(R.id.logo);
+            this.nameTxt = itemView.findViewById(R.id.shop_name_text);
         }
     }
 
@@ -66,7 +67,8 @@ public class OffersListAdapter extends RecyclerView.Adapter<OffersListAdapter.My
         databaseReference.child("shopDetails").child(shopId).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                holder.offerTxt.setText(dataSnapshot.child("discount").getValue(Double.class) + "% OFF");
+                holder.offerTxt.setText(Math.round(dataSnapshot.child("discount").getValue(Double.class)) + "% OFF");
+                holder.nameTxt.setText(dataSnapshot.child("name").getValue(String.class));
             }
 
             @Override

@@ -140,7 +140,8 @@
                             android:orientation="horizontal"
                             android:gravity="center"
                             android:background="@drawable/layout_bg"
-                            android:backgroundTint="#E2DADA">
+                            android:backgroundTint="#E2DADA"
+                            android:layout_marginBottom="8dp">
 
                             <ImageView
                                 android:layout_width="33dp"

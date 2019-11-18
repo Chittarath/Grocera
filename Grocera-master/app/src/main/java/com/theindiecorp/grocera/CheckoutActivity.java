@@ -360,7 +360,7 @@ public class CheckoutActivity extends AppCompatActivity {
                         String date = day + "/" + month + "/" + year + ", " + hour + ":" + minute;
 
                         OrderDetails orderDetails = new OrderDetails();
-                        orderDetails.setStatus("Placed");
+                        orderDetails.setStatus("Order Placed");
                         orderDetails.setUserId(FirebaseAuth.getInstance().getCurrentUser().getUid());
                         orderDetails.setCart(cart);
                         orderDetails.setAddress(Address);
