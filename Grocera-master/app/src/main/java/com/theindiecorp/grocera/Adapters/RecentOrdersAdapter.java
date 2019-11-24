@@ -12,12 +12,14 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.theindiecorp.grocera.Data.CartDetails;
+import com.theindiecorp.grocera.Data.Notification;
 import com.theindiecorp.grocera.Data.OrderDetails;
 import com.theindiecorp.grocera.OrderViewActivity;
 import com.theindiecorp.grocera.R;
@@ -133,6 +135,11 @@ public class RecentOrdersAdapter extends RecyclerView.Adapter<RecentOrdersAdapte
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         databaseReference.child("orderDetails").child(orderDetails.getOrderId()).child("status").setValue("Cancelled");
+                        Notification notification = new Notification();
+                        notification.setUserId(FirebaseAuth.getInstance().getCurrentUser().getUid());
+                        notification.setOrderId(orderDetails.getOrderId());
+                        notification.setType("Cancelled");
+                        databaseReference.child("notifications").child(orderDetails.getShopId()).child(orderDetails.getOrderId()).setValue(notification);
                     }
                 });
                 builder.setNegativeButton("Go back", new DialogInterface.OnClickListener() {
@@ -146,7 +153,7 @@ public class RecentOrdersAdapter extends RecyclerView.Adapter<RecentOrdersAdapte
             }
         });
 
-        if(orderDetails.getStatus().equals("Placed")){
+        if(orderDetails.getStatus().equals("Order Placed")){
             holder.cancelOrderBtn.setVisibility(View.VISIBLE);
             holder.reorderBtn.setVisibility(View.GONE);
         }
@@ -178,10 +185,16 @@ public class RecentOrdersAdapter extends RecyclerView.Adapter<RecentOrdersAdapte
 
         String date = day + "/" + month + "/" + year + ", " + hour + ":" + minute;
         orderDetails.setDate(date);
-        orderDetails.setStatus("Placed");
+        orderDetails.setStatus("Order Placed");
         orderDetails.setOrderId(id);
 
         databaseReference.child("orderDetails").child(id).setValue(orderDetails);
+
+        Notification notification = new Notification();
+        notification.setUserId(FirebaseAuth.getInstance().getCurrentUser().getUid());
+        notification.setOrderId(orderDetails.getOrderId());
+        notification.setType("Placed");
+        databaseReference.child("notifications").child(orderDetails.getShopId()).child(orderDetails.getOrderId()).setValue(notification);
     }
 
     @Override

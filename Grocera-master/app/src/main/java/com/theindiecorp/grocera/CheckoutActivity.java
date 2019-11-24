@@ -43,6 +43,7 @@ import com.theindiecorp.grocera.Adapters.AddressViewAdapter;
 import com.theindiecorp.grocera.Adapters.CartViewAdapter;
 import com.theindiecorp.grocera.Data.Address;
 import com.theindiecorp.grocera.Data.CartDetails;
+import com.theindiecorp.grocera.Data.Notification;
 import com.theindiecorp.grocera.Data.OrderDetails;
 import com.theindiecorp.grocera.Fragments.AddAddressFragment;
 
@@ -407,8 +408,16 @@ public class CheckoutActivity extends AppCompatActivity {
     private void placeOrder(OrderDetails orderDetails){
         DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference();
         String id = databaseReference.push().getKey();
+        orderDetails.setOrderId(id);
         databaseReference.child("orderDetails").child(id).setValue(orderDetails);
         databaseReference.child("cartDetails").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).removeValue();
+
+        Notification notification = new Notification();
+        notification.setUserId(FirebaseAuth.getInstance().getCurrentUser().getUid());
+        notification.setOrderId(id);
+        notification.setType("Placed");
+        databaseReference.child("notifications").child(orderDetails.getShopId()).child(id).setValue(notification);
+
         startActivity(new Intent(CheckoutActivity.this,OrderPlaced.class));
         finish();
     }

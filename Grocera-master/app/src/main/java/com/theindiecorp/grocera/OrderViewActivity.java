@@ -23,6 +23,7 @@ import com.theindiecorp.grocera.Adapters.HomeActivityRecycler;
 import com.theindiecorp.grocera.Adapters.OrderedItemsAdapter;
 import com.theindiecorp.grocera.Data.Address;
 import com.theindiecorp.grocera.Data.CartDetails;
+import com.theindiecorp.grocera.Data.Notification;
 import com.theindiecorp.grocera.Data.OrderDetails;
 import com.theindiecorp.grocera.Data.ShopDetails;
 
@@ -174,6 +175,12 @@ public class OrderViewActivity extends AppCompatActivity {
                     o.setOrderId(id);
 
                     databaseReference.child("orderDetails").child(id).setValue(o);
+
+
+                    Notification notification = new Notification();
+                    notification.setUserId(FirebaseAuth.getInstance().getCurrentUser().getUid());
+                    notification.setOrderId(o.getOrderId());
+                    databaseReference.child("notifications").child(o.getShopId()).child(o.getOrderId()).setValue(notification);
                 }
                 else{
                     Toast.makeText(OrderViewActivity.this,"This order is yet to be delivered",Toast.LENGTH_SHORT).show();
