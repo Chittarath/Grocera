@@ -99,6 +99,7 @@ public class ShopViewActivity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 productDetails = new ArrayList<>();
+                categories.add("All");
                 for(DataSnapshot snapshot : dataSnapshot.getChildren()){
                     ProductDetails p = snapshot.getValue(ProductDetails.class);
                     p.setId(snapshot.getKey());
@@ -126,26 +127,53 @@ public class ShopViewActivity extends AppCompatActivity {
                     @Override
                     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                         String category = categories.get(i);
-                        query.orderByChild("shopId").equalTo(shopId).addValueEventListener(new ValueEventListener() {
-                            @Override
-                            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                                productDetails = new ArrayList<>();
-                                for(DataSnapshot snapshot : dataSnapshot.getChildren()){
-                                    ProductDetails p = snapshot.getValue(ProductDetails.class);
-                                    p.setId(snapshot.getKey());
-                                    if(p.getCategory().equals(category)){
+                        if(category.equals("All")){
+                            query.orderByChild("shopId").equalTo(shopId).addValueEventListener(new ValueEventListener() {
+                                @Override
+                                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                    productDetails = new ArrayList<>();
+                                    for(DataSnapshot snapshot : dataSnapshot.getChildren()){
+                                        ProductDetails p = snapshot.getValue(ProductDetails.class);
+                                        p.setId(snapshot.getKey());
                                         productDetails.add(p);
+                                        String c = p.getCategory();
+                                        if(!categories.contains(c)){
+                                            categories.add(c);
+                                        }
                                     }
-                                    adapter.setProducts(productDetails);
+                                    adapter.setProducts(productDetails  );
                                     adapter.notifyDataSetChanged();
                                 }
-                            }
 
-                            @Override
-                            public void onCancelled(@NonNull DatabaseError databaseError) {
+                                @Override
+                                public void onCancelled(@NonNull DatabaseError databaseError) {
 
-                            }
-                        });
+                                }
+                            });
+                        }
+                        else{
+                            query.orderByChild("shopId").equalTo(shopId).addValueEventListener(new ValueEventListener() {
+                                @Override
+                                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                    productDetails = new ArrayList<>();
+                                    for(DataSnapshot snapshot : dataSnapshot.getChildren()){
+                                        ProductDetails p = snapshot.getValue(ProductDetails.class);
+                                        p.setId(snapshot.getKey());
+                                        if(p.getCategory().equals(category)){
+                                            productDetails.add(p);
+                                        }
+                                        adapter.setProducts(productDetails);
+                                        adapter.notifyDataSetChanged();
+                                    }
+                                }
+
+                                @Override
+                                public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                                }
+                            });
+                        }
+                        dialog.dismiss();
                     }
                 });
             }
