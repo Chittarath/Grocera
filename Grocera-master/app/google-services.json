@@ -89,6 +89,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "521866703896-j06uvmg8u5kct6hvk88735db4b9s8mdb.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.theindiecorp.grocera",
+            "certificate_hash": "3025cb66a45b50407315dc43fd5c31f23408b6ad"
+          }
+        },
+        {
           "client_id": "521866703896-dt2qj522lgdbnarhcv1frq232con9irn.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
