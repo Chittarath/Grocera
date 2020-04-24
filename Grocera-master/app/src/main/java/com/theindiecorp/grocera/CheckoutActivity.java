@@ -1,6 +1,7 @@
 package com.theindiecorp.grocera;
 
 import android.Manifest;
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
@@ -14,6 +15,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -39,6 +41,8 @@ import com.google.firebase.database.ValueEventListener;
 import com.paytm.pgsdk.PaytmOrder;
 import com.paytm.pgsdk.PaytmPGService;
 import com.paytm.pgsdk.PaytmPaymentTransactionCallback;
+import com.razorpay.Checkout;
+import com.razorpay.PaymentResultListener;
 import com.theindiecorp.grocera.Adapters.AddressViewAdapter;
 import com.theindiecorp.grocera.Adapters.CartViewAdapter;
 import com.theindiecorp.grocera.Data.Address;
@@ -58,24 +62,25 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.UUID;
 
-public class CheckoutActivity extends AppCompatActivity {
+public class CheckoutActivity extends AppCompatActivity implements PaymentResultListener {
 
     ArrayList<CartDetails> cart;
     ArrayList<Address> addresses;
-    public static String PAYMENT_TYPE = "";
+    public static String PAYMENT_TYPE = "", shopId;
     public static Address Address;
     Double total=0d,discount=0d,deliveryFee = 0d,toPay = 0d;
 
     private TextView totalTv,discountTv,deliveryFeeTv,toPayTv;
-    private Dialog loadingDialog, paymentmethodDialog;
-    private ImageButton paytm, cod;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_checkout);
 
-        final String shopId = getIntent().getStringExtra("shopId");
+        PAYMENT_TYPE = "";
+        Address = null;
+
+        shopId = getIntent().getStringExtra("shopId");
 
         final LinearLayout addressBox = findViewById(R.id.address_box);
         final FrameLayout addAddressFrameLayout = findViewById(R.id.checkout_add_address_fragment_container);
@@ -86,22 +91,6 @@ public class CheckoutActivity extends AppCompatActivity {
         toPayTv = findViewById(R.id.checkout_to_pay_tv);
 
         RecyclerView recyclerView = findViewById(R.id.checkout_product_list);
-
-        loadingDialog=new Dialog(CheckoutActivity.this);
-        loadingDialog.setContentView(R.layout.loading_progress_dialog);
-        loadingDialog.setCancelable(false);
-        loadingDialog.getWindow().setBackgroundDrawable(getDrawable(R.drawable.slider_background));
-        loadingDialog.getWindow().setLayout(ViewGroup.LayoutParams.WRAP_CONTENT,ViewGroup.LayoutParams.WRAP_CONTENT);
-
-
-        paymentmethodDialog=new Dialog(CheckoutActivity.this);
-        paymentmethodDialog.setContentView(R.layout.payment_method);
-        paymentmethodDialog.setCancelable(true);
-      /*  paymentmethodDialog.getWindow().setBackgroundDrawable(getDrawable(R.drawable.slider_background));*/
-        paymentmethodDialog.getWindow().setLayout(ViewGroup.LayoutParams.WRAP_CONTENT,ViewGroup.LayoutParams.WRAP_CONTENT);
-        paytm=paymentmethodDialog.findViewById(R.id.paytm_btn);
-        cod = paymentmethodDialog.findViewById(R.id.cod_btn);
-
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         final RecyclerView addressRecycler = findViewById(R.id.checkout_address_list);
@@ -203,134 +192,10 @@ public class CheckoutActivity extends AppCompatActivity {
         showPaymentsBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                paymentmethodDialog.show();
-
+                Dialog dialog = onCreateDialog();
+                dialog.show();
             }
         });
-
-        cod.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                PAYMENT_TYPE = "OFFLINE";
-            }
-        });
-
-        paytm.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                paymentmethodDialog.dismiss();
-                loadingDialog.show();
-                if (ContextCompat.checkSelfPermission(CheckoutActivity.this, Manifest.permission.READ_SMS) != PackageManager.PERMISSION_GRANTED) {
-                    ActivityCompat.requestPermissions(CheckoutActivity.this, new String[]{Manifest.permission.READ_SMS, Manifest.permission.RECEIVE_SMS}, 101);
-                }
-
-                final String M_id="hlisbA90705689498446";
-                final String customer_id= FirebaseAuth.getInstance().getUid();
-                final String order_id= UUID.randomUUID().toString().substring(0,28);
-                String url="https://outward-bound-radio.000webhostapp.com/paytm/paytm/generateChecksum.php";
-                final String callbackurl="https://pguat.paytm.com/paytmchecksum/paytmCallback.jsp";
-
-                RequestQueue requestQueue = Volley.newRequestQueue(CheckoutActivity.this);
-                StringRequest stringRequest=new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-                        try {
-                            JSONObject jsonObject=new JSONObject(response);
-
-                            if (jsonObject.has("CHECKSUMHASH")){
-                                String CHECKSUMHASH=jsonObject.getString("CHECKSUMHASH");
-
-                                PaytmPGService paytmPGService=PaytmPGService.getStagingService();
-                                HashMap<String, String> paramMap = new HashMap<String,String>();
-                                paramMap.put( "MID" , M_id);
-                                paramMap.put( "ORDER_ID" , order_id);
-                                paramMap.put( "CUST_ID" , customer_id);
-                                paramMap.put( "CHANNEL_ID" , "WAP");
-                                paramMap.put( "TXN_AMOUNT" , "100.00");
-                                paramMap.put( "WEBSITE" , "WEBSTAGING");
-                                paramMap.put( "INDUSTRY_TYPE_ID" , "Retail");
-                                paramMap.put( "CALLBACK_URL", callbackurl);
-                                paramMap.put("CHECKSUMHASH",CHECKSUMHASH);
-
-                                PaytmOrder paytmOrder=new PaytmOrder(paramMap);
-                                paytmPGService.initialize(paytmOrder,null);
-                                paytmPGService.startPaymentTransaction(CheckoutActivity.this, true, true, new PaytmPaymentTransactionCallback() {
-                                    @Override
-                                    public void onTransactionResponse(Bundle inResponse) {
-                                        Toast.makeText(getApplicationContext(), "Payment Transaction response " + inResponse.toString(), Toast.LENGTH_LONG).show();
-                                    }
-
-
-                                    @Override
-                                    public void networkNotAvailable() {
-                                        Toast.makeText(getApplicationContext(), "Network connection error: Check your internet connectivity", Toast.LENGTH_LONG).show();
-
-                                    }
-
-                                    @Override
-                                    public void clientAuthenticationFailed(String inErrorMessage) {
-                                        Toast.makeText(getApplicationContext(), "Authentication failed: Server error" + inErrorMessage.toString(), Toast.LENGTH_LONG).show();
-
-                                    }
-
-                                    @Override
-                                    public void someUIErrorOccurred(String inErrorMessage) {
-                                        Toast.makeText(getApplicationContext(), "UI Error " + inErrorMessage , Toast.LENGTH_LONG).show();
-
-                                    }
-
-                                    @Override
-                                    public void onErrorLoadingWebPage(int iniErrorCode, String inErrorMessage, String inFailingUrl) {
-
-                                        Toast.makeText(getApplicationContext(), "Unable to load webpage " + inErrorMessage.toString(), Toast.LENGTH_LONG).show();
-                                    }
-
-                                    @Override
-                                    public void onBackPressedCancelTransaction() {
-                                        Toast.makeText(getApplicationContext(), "Transaction cancelled" , Toast.LENGTH_LONG).show();
-
-                                    }
-
-                                    @Override
-                                    public void onTransactionCancel(String inErrorMessage, Bundle inResponse) {
-                                        Toast.makeText(getApplicationContext(), "Transaction cancelled", Toast.LENGTH_SHORT).show();
-
-                                    }
-                                });
-                            }
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-
-                    }
-                }, new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        loadingDialog.dismiss();
-                        Toast.makeText(CheckoutActivity.this, "something went wrong!", Toast.LENGTH_SHORT).show();
-
-                    }
-                }){
-                    @Override
-                    protected Map<String, String> getParams() throws AuthFailureError {
-                        HashMap<String, String> paramMap = new HashMap<String,String>();
-                        paramMap.put( "MID" , M_id);
-                        paramMap.put( "ORDER_ID" , order_id);
-                        paramMap.put( "CUST_ID" , customer_id);
-                        paramMap.put( "CHANNEL_ID" , "WAP");
-                        paramMap.put( "TXN_AMOUNT" ,"100.00");
-                        paramMap.put( "WEBSITE" , "WEBSTAGING");
-                        paramMap.put( "INDUSTRY_TYPE_ID" , "Retail");
-                        paramMap.put( "CALLBACK_URL", callbackurl);
-                        return paramMap;
-                    }
-                };
-                requestQueue.add(stringRequest);
-
-
-            }
-        });
-
 
         Button placeOrderBtn = findViewById(R.id.checkout_place_order_btn);
         placeOrderBtn.setOnClickListener(new View.OnClickListener() {
@@ -351,28 +216,13 @@ public class CheckoutActivity extends AppCompatActivity {
                             return;
                         }
 
-                        Calendar calendar = Calendar.getInstance();
-                        int day = calendar.get(Calendar.DAY_OF_MONTH);
-                        int month = calendar.get(Calendar.MONTH) + 1;
-                        int year = calendar.get(Calendar.YEAR);
-                        int hour = calendar.get(Calendar.HOUR_OF_DAY);
-                        int minute = calendar.get(Calendar.MINUTE);
-
-                        String date = day + "/" + month + "/" + year + ", " + hour + ":" + minute;
-
-                        OrderDetails orderDetails = new OrderDetails();
-                        orderDetails.setStatus("Order Placed");
-                        orderDetails.setUserId(FirebaseAuth.getInstance().getCurrentUser().getUid());
-                        orderDetails.setCart(cart);
-                        orderDetails.setAddress(Address);
-                        orderDetails.setModeOfPayment(PAYMENT_TYPE);
-                        orderDetails.setAmountPayable(toPay);
-                        orderDetails.setDate(date);
-                        orderDetails.setShopId(shopId);
-                        orderDetails.setTotal(total);
-                        orderDetails.setDeliveryFee(deliveryFee);
-                        orderDetails.setDiscount(discount);
-                        placeOrder(orderDetails);
+                        if(PAYMENT_TYPE.equals("OFFLINE")){
+                            placeOrder();
+                            dialog.dismiss();
+                        }
+                        else{
+                            startPayment(toPay);
+                        }
                     }
                 });
                 builder.setNegativeButton("Go Back", new DialogInterface.OnClickListener() {
@@ -389,6 +239,32 @@ public class CheckoutActivity extends AppCompatActivity {
 
     }
 
+    private Dialog onCreateDialog(){
+        Dialog dialog = new Dialog(this);
+        dialog.setContentView(R.layout.payment_method);
+
+        ImageButton codBtn = dialog.findViewById(R.id.cod_btn);
+        ImageButton onlinePaymentBtn = dialog.findViewById(R.id.paytm_btn);
+
+        codBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                PAYMENT_TYPE = "OFFLINE";
+                dialog.dismiss();
+            }
+        });
+
+        onlinePaymentBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                PAYMENT_TYPE = "ONLINE";
+                dialog.dismiss();
+            }
+        });
+
+        return dialog;
+    }
+
     private void calculateFee(ArrayList<CartDetails> cart) {
         if(!cart.isEmpty()){
             total = 0d;
@@ -397,7 +273,7 @@ public class CheckoutActivity extends AppCompatActivity {
             for(int i = 0 ;i < cart.size(); i++){
                 CartDetails c = cart.get(i);
                 Double amt = c.getPricePerPiece() * c.getQuantity();
-                Double disc = amt * (c.getDiscount()/100) ;
+                double disc = amt * (c.getDiscount()/100) ;
                 total = total + amt;
                 discount = discount + (disc);
             }
@@ -405,7 +281,29 @@ public class CheckoutActivity extends AppCompatActivity {
         }
     }
 
-    private void placeOrder(OrderDetails orderDetails){
+    private void placeOrder(){
+        Calendar calendar = Calendar.getInstance();
+        int day = calendar.get(Calendar.DAY_OF_MONTH);
+        int month = calendar.get(Calendar.MONTH) + 1;
+        int year = calendar.get(Calendar.YEAR);
+        int hour = calendar.get(Calendar.HOUR_OF_DAY);
+        int minute = calendar.get(Calendar.MINUTE);
+
+        String date = day + "/" + month + "/" + year + ", " + hour + ":" + minute;
+
+        OrderDetails orderDetails = new OrderDetails();
+        orderDetails.setStatus("Order Placed");
+        orderDetails.setUserId(FirebaseAuth.getInstance().getCurrentUser().getUid());
+        orderDetails.setCart(cart);
+        orderDetails.setAddress(Address);
+        orderDetails.setModeOfPayment(PAYMENT_TYPE);
+        orderDetails.setAmountPayable(toPay);
+        orderDetails.setDate(date);
+        orderDetails.setShopId(shopId);
+        orderDetails.setTotal(total);
+        orderDetails.setDeliveryFee(deliveryFee);
+        orderDetails.setDiscount(discount);
+
         DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference();
         String id = databaseReference.push().getKey();
         orderDetails.setOrderId(id);
@@ -430,9 +328,32 @@ public class CheckoutActivity extends AppCompatActivity {
         return false;
     }
 
+    private void startPayment(Double amount){
+        Checkout checkout = new Checkout();
+        checkout.setKeyID("rzp_test_hm9uR6b7qPqtH6");
+        checkout.setImage(R.mipmap.ic_launcher);
+
+        Activity activity = this;
+
+        try {
+            JSONObject options = new JSONObject();
+            options.put("currency", "INR");
+            options.put("amount", amount * 100);
+            checkout.open(activity, options);
+        } catch (JSONException e) {
+            Log.d("ErrorPayment",  e.getMessage());
+            Toast.makeText(activity, "Error in payment: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+            e.printStackTrace();
+        }
+    }
+
     @Override
-    protected void onPause() {
-        super.onPause();
-        loadingDialog.dismiss();
+    public void onPaymentSuccess(String s) {
+        placeOrder();
+    }
+
+    @Override
+    public void onPaymentError(int i, String s) {
+        Toast.makeText(this, "Payment Failed. Please try again later.", Toast.LENGTH_SHORT).show();
     }
 }

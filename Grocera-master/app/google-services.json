@@ -82,7 +82,7 @@
     },
     {
       "client_info": {
-        "mobilesdk_app_id": "1:521866703896:android:a7726cffd79d9d24",
+        "mobilesdk_app_id": "1:521866703896:android:ae5674924a0d81aa57bf6d",
         "android_client_info": {
           "package_name": "com.theindiecorp.grocera"
         }
@@ -94,75 +94,6 @@
           "android_info": {
             "package_name": "com.theindiecorp.grocera",
             "certificate_hash": "3025cb66a45b50407315dc43fd5c31f23408b6ad"
-          }
-        },
-        {
-          "client_id": "521866703896-dt2qj522lgdbnarhcv1frq232con9irn.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.theindiecorp.grocera",
-            "certificate_hash": "6ae2463d6184d421344cb95308028ccef70c03e0"
-          }
-        },
-        {
-          "client_id": "521866703896-c6aofc4mohmj31i1oqlllrc10fb6cng9.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.theindiecorp.grocera",
-            "certificate_hash": "32a7292a50905563f4ef56d1784c9dde0d08ed7b"
-          }
-        },
-        {
-          "client_id": "521866703896-bgs6hli7q7l35dfkiev4d9huom0s9hah.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.theindiecorp.grocera",
-            "certificate_hash": "f5f78db82357231a7339e58d30ae59a57450940c"
-          }
-        },
-        {
-          "client_id": "521866703896-5ddar94587qlubfbnhg9ou7gt63bvrnd.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
-      "api_key": [
-        {
-          "current_key": "AIzaSyCDk2crJsbzvcJJv5OAK6B27yy2Uvsahe0"
-        }
-      ],
-      "services": {
-        "appinvite_service": {
-          "other_platform_oauth_client": [
-            {
-              "client_id": "521866703896-5ddar94587qlubfbnhg9ou7gt63bvrnd.apps.googleusercontent.com",
-              "client_type": 3
-            }
-          ]
-        }
-      }
-    },
-    {
-      "client_info": {
-        "mobilesdk_app_id": "1:521866703896:android:f39e7d36b70a1e69",
-        "android_client_info": {
-          "package_name": "com.theindiecorp.groceraseller"
-        }
-      },
-      "oauth_client": [
-        {
-          "client_id": "521866703896-ic7mmnpgrsd9a4f64jdfn7har5dcmac7.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.theindiecorp.groceraseller",
-            "certificate_hash": "6ae2463d6184d421344cb95308028ccef70c03e0"
-          }
-        },
-        {
-          "client_id": "521866703896-d0p2i53n9jbo41nu1e23chlh1pqo56rf.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.theindiecorp.groceraseller",
-            "certificate_hash": "f5f78db82357231a7339e58d30ae59a57450940c"
           }
         },
         {

@@ -65,6 +65,7 @@ public class LoginActivity extends AppCompatActivity {
 
         if(auth.getCurrentUser() != null){
             startActivity(new Intent(LoginActivity.this,MainActivity.class));
+            finish();
         }
 
         inputPhone = findViewById(R.id.login_phone);
@@ -170,6 +171,7 @@ public class LoginActivity extends AppCompatActivity {
                             });
 
                             startActivity(new Intent(LoginActivity.this,MainActivity.class));
+                            finish();
 
                         } else {
                             if (task.getException() instanceof FirebaseAuthInvalidCredentialsException) {
