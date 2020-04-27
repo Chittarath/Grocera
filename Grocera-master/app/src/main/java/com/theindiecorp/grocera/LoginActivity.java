@@ -145,8 +145,6 @@ public class LoginActivity extends AppCompatActivity {
                             ref.child(userId).child("id").addListenerForSingleValueEvent(new ValueEventListener() {
                                 @Override
                                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                                    String uid = dataSnapshot.getValue(String.class);
-
                                     Query query = FirebaseDatabase.getInstance().getReference("users")
                                             .orderByChild("phone").equalTo(phone);
                                     query.addValueEventListener(new ValueEventListener() {
@@ -154,6 +152,12 @@ public class LoginActivity extends AppCompatActivity {
                                         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                                             if(!dataSnapshot.exists()){
                                                 writeNewUser(new User("", phone, userId));
+                                                startActivity(new Intent(LoginActivity.this,ManageProfileActivity.class));
+                                                finish();
+                                            }
+                                            else{
+                                                startActivity(new Intent(LoginActivity.this,MainActivity.class));
+                                                finish();
                                             }
                                         }
 
@@ -169,9 +173,6 @@ public class LoginActivity extends AppCompatActivity {
 
                                 }
                             });
-
-                            startActivity(new Intent(LoginActivity.this,MainActivity.class));
-                            finish();
 
                         } else {
                             if (task.getException() instanceof FirebaseAuthInvalidCredentialsException) {
