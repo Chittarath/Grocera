@@ -315,6 +315,7 @@ public class CheckoutActivity extends AppCompatActivity implements PaymentResult
         notification.setOrderId(id);
         notification.setType("Placed");
         databaseReference.child("notifications").child(orderDetails.getShopId()).child(id).setValue(notification);
+        databaseReference.child("notifications").child(orderDetails.getShopId()).child(id).child("content").setValue("You have a new order");
 
         startActivity(new Intent(CheckoutActivity.this,OrderPlaced.class));
         finish();

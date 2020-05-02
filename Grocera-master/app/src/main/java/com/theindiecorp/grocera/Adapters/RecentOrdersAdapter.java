@@ -18,9 +18,12 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.razorpay.Checkout;
+import com.theindiecorp.grocera.CheckoutActivity;
 import com.theindiecorp.grocera.Data.CartDetails;
 import com.theindiecorp.grocera.Data.Notification;
 import com.theindiecorp.grocera.Data.OrderDetails;
+import com.theindiecorp.grocera.MainActivity;
 import com.theindiecorp.grocera.OrderViewActivity;
 import com.theindiecorp.grocera.R;
 
@@ -140,6 +143,7 @@ public class RecentOrdersAdapter extends RecyclerView.Adapter<RecentOrdersAdapte
                         notification.setOrderId(orderDetails.getOrderId());
                         notification.setType("Cancelled");
                         databaseReference.child("notifications").child(orderDetails.getShopId()).child(orderDetails.getOrderId()).setValue(notification);
+                        databaseReference.child("notifications").child(orderDetails.getShopId()).child(orderDetails.getOrderId()).child("content").setValue("Order Cancelled");
                     }
                 });
                 builder.setNegativeButton("Go back", new DialogInterface.OnClickListener() {
@@ -174,27 +178,14 @@ public class RecentOrdersAdapter extends RecyclerView.Adapter<RecentOrdersAdapte
     }
 
     private void placeOrder(OrderDetails orderDetails) {
-        String id = databaseReference.push().getKey();
+        ArrayList<CartDetails> cartDetails = orderDetails.getCart();
 
-        Calendar calendar = Calendar.getInstance();
-        int day = calendar.get(Calendar.DAY_OF_MONTH);
-        int month = calendar.get(Calendar.MONTH) + 1;
-        int year = calendar.get(Calendar.YEAR);
-        int hour = calendar.get(Calendar.HOUR_OF_DAY);
-        int minute = calendar.get(Calendar.MINUTE);
-
-        String date = day + "/" + month + "/" + year + ", " + hour + ":" + minute;
-        orderDetails.setDate(date);
-        orderDetails.setStatus("Order Placed");
-        orderDetails.setOrderId(id);
-
-        databaseReference.child("orderDetails").child(id).setValue(orderDetails);
-
-        Notification notification = new Notification();
-        notification.setUserId(FirebaseAuth.getInstance().getCurrentUser().getUid());
-        notification.setOrderId(orderDetails.getOrderId());
-        notification.setType("Placed");
-        databaseReference.child("notifications").child(orderDetails.getShopId()).child(orderDetails.getOrderId()).setValue(notification);
+        for(CartDetails c : cartDetails){
+            databaseReference.child("cartDetails").child(MainActivity.userId).child(c.getProductId()).setValue(c);
+        }
+        Intent intent = new Intent(context, CheckoutActivity.class);
+        intent.putExtra("shopId", orderDetails.getShopId());
+        context.startActivity(intent);
     }
 
     @Override

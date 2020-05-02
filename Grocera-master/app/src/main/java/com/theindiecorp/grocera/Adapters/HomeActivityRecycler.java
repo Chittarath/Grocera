@@ -77,10 +77,6 @@ public class HomeActivityRecycler extends RecyclerView.Adapter<HomeActivityRecyc
         holder.shopAddress.setText(shopDetails.getAddress());
         holder.shopName.setText(shopDetails.getName());
 
-        if(shopDetails.getStatus().equals("close")){
-            holder.itemView.setBackgroundColor(holder.itemView.getResources().getColor(R.color.grey));
-        }
-
         FirebaseStorage.getInstance().getReference().child("shops/" + shopDetails.getId() + "/images/profile_pic/profile_pic.jpeg").getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
             @Override
             public void onSuccess(Uri uri) {

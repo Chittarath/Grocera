@@ -160,27 +160,14 @@ public class OrderViewActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 if(!o.getStatus().equals("Order Placed")){
-                    String id = databaseReference.push().getKey();
+                    ArrayList<CartDetails> cartDetails = o.getCart();
 
-                    Calendar calendar = Calendar.getInstance();
-                    int day = calendar.get(Calendar.DAY_OF_MONTH);
-                    int month = calendar.get(Calendar.MONTH) + 1;
-                    int year = calendar.get(Calendar.YEAR);
-                    int hour = calendar.get(Calendar.HOUR_OF_DAY);
-                    int minute = calendar.get(Calendar.MINUTE);
-
-                    String date = day + "/" + month + "/" + year + ", " + hour + ":" + minute;
-                    o.setDate(date);
-                    o.setStatus("Placed");
-                    o.setOrderId(id);
-
-                    databaseReference.child("orderDetails").child(id).setValue(o);
-
-
-                    Notification notification = new Notification();
-                    notification.setUserId(FirebaseAuth.getInstance().getCurrentUser().getUid());
-                    notification.setOrderId(o.getOrderId());
-                    databaseReference.child("notifications").child(o.getShopId()).child(o.getOrderId()).setValue(notification);
+                    for(CartDetails c : cartDetails){
+                        databaseReference.child("cartDetails").child(MainActivity.userId).child(c.getProductId()).setValue(c);
+                    }
+                    Intent intent = new Intent(OrderViewActivity.this, CheckoutActivity.class);
+                    intent.putExtra("shopId", o.getShopId());
+                    startActivity(intent);
                 }
                 else{
                     Toast.makeText(OrderViewActivity.this,"This order is yet to be delivered",Toast.LENGTH_SHORT).show();
