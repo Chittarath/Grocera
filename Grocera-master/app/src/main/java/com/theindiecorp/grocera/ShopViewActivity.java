@@ -53,6 +53,7 @@ public class ShopViewActivity extends AppCompatActivity {
         final ImageView profilePic = findViewById(R.id.shop_image);
         final TextView discountTxt = findViewById(R.id.discount_txt);
         FloatingActionButton fab = findViewById(R.id.fab);
+        Button cartViewBtn = findViewById(R.id.shop_view_cart_btn);
 
         final View dialogView = LayoutInflater.from(this).inflate(R.layout.filter_fab_dialog, null);
 
@@ -109,7 +110,7 @@ public class ShopViewActivity extends AppCompatActivity {
                         categories.add(c);
                     }
                 }
-                adapter.setProducts(productDetails  );
+                adapter.setProducts(productDetails);
                 adapter.notifyDataSetChanged();
             }
 
@@ -186,8 +187,22 @@ public class ShopViewActivity extends AppCompatActivity {
             }
         });
 
+        databaseReference.child("cartDetails").child(MainActivity.userId).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if(dataSnapshot.exists()){
+                    cartViewBtn.setVisibility(View.VISIBLE);
+                }
+                else
+                    cartViewBtn.setVisibility(View.GONE);
+            }
 
-        Button cartViewBtn = findViewById(R.id.shop_view_cart_btn);
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
         cartViewBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

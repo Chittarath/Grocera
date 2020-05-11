@@ -134,6 +134,9 @@ public class CheckoutActivity extends AppCompatActivity implements PaymentResult
                     CartDetails c = snapshot.getValue(CartDetails.class);
                     cart.add(c);
                 }
+                if(cart.isEmpty()){
+                    startActivity(new Intent(CheckoutActivity.this, MainActivity.class));
+                }
                 calculateFee(cart);
                 adapter.setProducts(cart);
                 totalTv.setText("Rs." + total);

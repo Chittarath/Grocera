@@ -168,13 +168,15 @@
 
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/shop_view_recycler"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:scrollbars="horizontal"
                 tools:listitem="@layout/shop_view_item"
                 android:layout_gravity="center"
-                android:layout_marginBottom="60dp"
-                android:layout_marginTop="12dp"/>
+                android:layout_marginBottom="120dp"
+                android:layout_marginTop="12dp"
+                app:layoutManager="android.support.v7.widget.GridLayoutManager"
+                app:spanCount="3"/>
 
         </LinearLayout>
 
@@ -191,25 +193,26 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:layout_marginBottom="15dp"
+            android:layout_marginBottom="8dp"
             android:background="@drawable/green_gradient"
             android:elevation="1dp"
             android:src="@drawable/options"
             app:fabSize="normal" />
 
-    </LinearLayout>
+        <Button
+            android:id="@+id/shop_view_cart_btn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentStart="true"
+            android:background="@color/colorPrimary"
+            android:minHeight="56dp"
+            android:text="View Cart"
+            android:textColor="@android:color/white"
+            android:textSize="15dp"
+            android:visibility="gone"
+            android:layout_marginTop="12dp"/>
 
-    <Button
-        android:id="@+id/shop_view_cart_btn"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentStart="true"
-        android:background="@color/colorPrimary"
-        android:minHeight="56dp"
-        android:text="View Cart"
-        android:textColor="@android:color/white"
-        android:textSize="15dp"
-        android:visibility="gone"/>
+    </LinearLayout>
 
 </RelativeLayout>

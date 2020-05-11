@@ -1,7 +1,9 @@
 package com.theindiecorp.grocera.Adapters;
 
 import android.Manifest;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.location.Location;
 import android.net.Uri;
@@ -19,9 +21,13 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
+import com.theindiecorp.grocera.Data.CartDetails;
 import com.theindiecorp.grocera.Data.ShopDetails;
 import com.theindiecorp.grocera.Fragments.MainFeedFragment;
 import com.theindiecorp.grocera.MainActivity;
@@ -33,9 +39,7 @@ import java.util.ArrayList;
 public class HomeActivityRecycler extends RecyclerView.Adapter<HomeActivityRecycler.MyViewHolder> {
     private ArrayList<ShopDetails> dataSet;
     private DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference();
-
-    Context context;
-    CoordinatorLayout layout;
+    private Context context;
 
     public int setShops(ArrayList<ShopDetails> dataSet){
         this.dataSet = dataSet;
@@ -87,11 +91,49 @@ public class HomeActivityRecycler extends RecyclerView.Adapter<HomeActivityRecyc
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 if(shopDetails.getStatus().equals("close")){
                     Toast.makeText(context, holder.shopName.getText()+ " is closed", Toast.LENGTH_SHORT).show();
                 }
+
                 else{
-                    context.startActivity(new Intent(context, ShopViewActivity.class).putExtra("shopId",shopDetails.getId()));
+                    databaseReference.child("cartDetails").child(MainActivity.userId).addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                            if(dataSnapshot.exists()){
+                                for(DataSnapshot snapshot : dataSnapshot.getChildren()){
+                                    CartDetails c = snapshot.getValue(CartDetails.class);
+                                    if(!c.getShopId().equals(shopDetails.getId())){
+                                        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+                                        builder.setCancelable(true);
+                                        builder.setMessage("Your cart has items from another store. Clear your cart?");
+                                        builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                                            @Override
+                                            public void onClick(DialogInterface dialogInterface, int i) {
+                                                databaseReference.child("cartDetails").child(MainActivity.userId).removeValue();
+                                                context.startActivity(new Intent(context, ShopViewActivity.class).putExtra("shopId",shopDetails.getId()));
+                                            }
+                                        });
+                                        builder.setNegativeButton("No", null);
+                                        AlertDialog dialog = builder.create();
+                                        dialog.show();
+                                    }
+                                    else{
+                                        context.startActivity(new Intent(context, ShopViewActivity.class).putExtra("shopId",shopDetails.getId()));
+                                        break;
+                                    }
+                                }
+                            }
+                            else{
+                                context.startActivity(new Intent(context, ShopViewActivity.class).putExtra("shopId",shopDetails.getId()));
+                            }
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                        }
+                    });
                 }
             }
         });
