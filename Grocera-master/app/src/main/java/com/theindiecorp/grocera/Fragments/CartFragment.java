@@ -33,7 +33,7 @@ import java.util.ArrayList;
 
 public class CartFragment extends Fragment {
 
-    ArrayList<CartDetails> cart;
+    public ArrayList<CartDetails> cart;
     Double total = 0d;
 
     @Nullable
