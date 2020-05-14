@@ -97,43 +97,24 @@ public class HomeActivityRecycler extends RecyclerView.Adapter<HomeActivityRecyc
                 }
 
                 else{
-                    databaseReference.child("cartDetails").child(MainActivity.userId).addValueEventListener(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                            if(dataSnapshot.exists()){
-                                for(DataSnapshot snapshot : dataSnapshot.getChildren()){
-                                    CartDetails c = snapshot.getValue(CartDetails.class);
-                                    if(!c.getShopId().equals(shopDetails.getId())){
-                                        AlertDialog.Builder builder = new AlertDialog.Builder(context);
-                                        builder.setCancelable(true);
-                                        builder.setMessage("Your cart has items from another store. Clear your cart?");
-                                        builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-                                            @Override
-                                            public void onClick(DialogInterface dialogInterface, int i) {
-                                                databaseReference.child("cartDetails").child(MainActivity.userId).removeValue();
-                                                context.startActivity(new Intent(context, ShopViewActivity.class).putExtra("shopId",shopDetails.getId()));
-                                            }
-                                        });
-                                        builder.setNegativeButton("No", null);
-                                        AlertDialog dialog = builder.create();
-                                        dialog.show();
-                                    }
-                                    else{
-                                        context.startActivity(new Intent(context, ShopViewActivity.class).putExtra("shopId",shopDetails.getId()));
-                                        break;
-                                    }
-                                }
-                            }
-                            else{
+                    if(MainActivity.firstItem.getShopId().equals(shopDetails.getId())){
+                        context.startActivity(new Intent(context, ShopViewActivity.class).putExtra("shopId", shopDetails.getId()));
+                    }
+                    else{
+                        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+                        builder.setCancelable(true);
+                        builder.setMessage("Your cart has items from another store. Clear your cart?");
+                        builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                databaseReference.child("cartDetails").child(MainActivity.userId).removeValue();
                                 context.startActivity(new Intent(context, ShopViewActivity.class).putExtra("shopId",shopDetails.getId()));
                             }
-                        }
-
-                        @Override
-                        public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                        }
-                    });
+                        });
+                        builder.setNegativeButton("No", null);
+                        AlertDialog dialog = builder.create();
+                        dialog.show();
+                    }
                 }
             }
         });
