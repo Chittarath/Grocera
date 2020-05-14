@@ -47,7 +47,6 @@ public class MainActivity extends AppCompatActivity {
 
     private static final String USER_ID = "USER_ID";
     private static final String EDITABLE = "EDITABLE";
-
     public static CartDetails firstItem = new CartDetails();
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
@@ -123,8 +122,10 @@ public class MainActivity extends AppCompatActivity {
                 if(dataSnapshot.exists()){
                     for(DataSnapshot snapshot : dataSnapshot.getChildren()){
                         firstItem = snapshot.getValue(CartDetails.class);
+                        break;
                     }
                 }
+
             }
 
             @Override

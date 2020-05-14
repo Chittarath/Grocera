@@ -1,8 +1,8 @@
 <component name="libraryTable">
   <library name="Gradle: io.kommunicate:kommunicateui:1.9.0@aar">
     <CLASSES>
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/d744a90a9b9ec6122655f64b40159a52/jars/classes.jar!/" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/d744a90a9b9ec6122655f64b40159a52/res" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/05667e1b978de9eb56a9799f6cd34b76/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/05667e1b978de9eb56a9799f6cd34b76/res" />
     </CLASSES>
     <JAVADOC />
     <SOURCES>

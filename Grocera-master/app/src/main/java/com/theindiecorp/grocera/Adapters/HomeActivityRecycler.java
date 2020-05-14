@@ -40,6 +40,7 @@ public class HomeActivityRecycler extends RecyclerView.Adapter<HomeActivityRecyc
     private ArrayList<ShopDetails> dataSet;
     private DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference();
     private Context context;
+    private ArrayList<CartDetails> cartDetails;
 
     public int setShops(ArrayList<ShopDetails> dataSet){
         this.dataSet = dataSet;
@@ -95,7 +96,6 @@ public class HomeActivityRecycler extends RecyclerView.Adapter<HomeActivityRecyc
                 if(shopDetails.getStatus().equals("close")){
                     Toast.makeText(context, holder.shopName.getText()+ " is closed", Toast.LENGTH_SHORT).show();
                 }
-
                 else{
                     if(MainActivity.firstItem.getShopId().equals(shopDetails.getId())){
                         context.startActivity(new Intent(context, ShopViewActivity.class).putExtra("shopId", shopDetails.getId()));
