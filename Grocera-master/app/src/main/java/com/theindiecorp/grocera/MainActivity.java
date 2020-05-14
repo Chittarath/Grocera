@@ -47,7 +47,9 @@ public class MainActivity extends AppCompatActivity {
 
     private static final String USER_ID = "USER_ID";
     private static final String EDITABLE = "EDITABLE";
-    public static CartDetails firstItem = new CartDetails();
+
+    public static boolean alreadyHasCart = false;
+    public static CartDetails firstItemOfCart = new CartDetails();
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -120,12 +122,16 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if(dataSnapshot.exists()){
+                    alreadyHasCart = true;
                     for(DataSnapshot snapshot : dataSnapshot.getChildren()){
-                        firstItem = snapshot.getValue(CartDetails.class);
+                        CartDetails c = snapshot.getValue(CartDetails.class);
+                        firstItemOfCart = c;
                         break;
                     }
                 }
-
+                else{
+                    alreadyHasCart = false;
+                }
             }
 
             @Override

@@ -40,7 +40,6 @@ public class HomeActivityRecycler extends RecyclerView.Adapter<HomeActivityRecyc
     private ArrayList<ShopDetails> dataSet;
     private DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference();
     private Context context;
-    private ArrayList<CartDetails> cartDetails;
 
     public int setShops(ArrayList<ShopDetails> dataSet){
         this.dataSet = dataSet;
@@ -96,11 +95,8 @@ public class HomeActivityRecycler extends RecyclerView.Adapter<HomeActivityRecyc
                 if(shopDetails.getStatus().equals("close")){
                     Toast.makeText(context, holder.shopName.getText()+ " is closed", Toast.LENGTH_SHORT).show();
                 }
-                else{
-                    if(MainActivity.firstItem.getShopId().equals(shopDetails.getId())){
-                        context.startActivity(new Intent(context, ShopViewActivity.class).putExtra("shopId", shopDetails.getId()));
-                    }
-                    else{
+                else if(MainActivity.alreadyHasCart){
+                    if(!MainActivity.firstItemOfCart.getShopId().equals(shopDetails.getId())){
                         AlertDialog.Builder builder = new AlertDialog.Builder(context);
                         builder.setCancelable(true);
                         builder.setMessage("Your cart has items from another store. Clear your cart?");
@@ -109,12 +105,17 @@ public class HomeActivityRecycler extends RecyclerView.Adapter<HomeActivityRecyc
                             public void onClick(DialogInterface dialogInterface, int i) {
                                 databaseReference.child("cartDetails").child(MainActivity.userId).removeValue();
                                 context.startActivity(new Intent(context, ShopViewActivity.class).putExtra("shopId",shopDetails.getId()));
-                            }
-                        });
+                            }});
                         builder.setNegativeButton("No", null);
                         AlertDialog dialog = builder.create();
                         dialog.show();
                     }
+                    else{
+                        context.startActivity(new Intent(context, ShopViewActivity.class).putExtra("shopId",shopDetails.getId()));
+                    }
+                }
+                else{
+                    context.startActivity(new Intent(context, ShopViewActivity.class).putExtra("shopId",shopDetails.getId()));
                 }
             }
         });
