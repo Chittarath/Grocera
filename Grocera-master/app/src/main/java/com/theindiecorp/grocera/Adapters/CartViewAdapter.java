@@ -136,14 +136,13 @@ public class CartViewAdapter extends RecyclerView.Adapter<CartViewAdapter.MyView
                 databaseReference.child("cartDetails").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child(cart.getProductId()).child("quantity").setValue(cart.getQuantity());
                 databaseReference.child("productDetails").child(cart.getProductId())
                         .child("Stock").setValue(stock + 1);
+
+                if(cart.getQuantity() <= 0){
+                    databaseReference.child("cartDetails").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child(cart.getProductId()).removeValue();
+                }
+
             }
         });
-
-        if(cart.getQuantity() == 0){
-            dataSet.remove(listPosition);
-            databaseReference.child("cartDetails").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child(cart.getProductId()).removeValue();
-        }
-
     }
 
     @Override
