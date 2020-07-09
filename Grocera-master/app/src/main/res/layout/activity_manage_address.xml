@@ -36,7 +36,7 @@
                 android:textStyle="bold"
                 android:layout_margin="12dp"
                 android:textColor="@android:color/black"
-                android:text="Manage Address"/>
+                android:text="@string/manage_address"/>
 
         </LinearLayout>
 
@@ -63,7 +63,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:background="@color/colorPrimary"
-        android:text="Add New Address"
+        android:text="@string/add_new_address"
         android:textColor="@android:color/white"/>
 
 </RelativeLayout>

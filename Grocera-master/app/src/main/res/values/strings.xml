@@ -3,7 +3,44 @@
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
-    
+    <string name="checkout">Checkout</string>
+    <string name="select_address">Select Address</string>
+    <string name="select_payment_method">Select Payment Method</string>
+    <string name="bill_details">Bill Details</string>
+    <string name="item_total">Item Total</string>
+    <string name="item_discount">Item Discount</string>
+    <string name="delivery_fee">Delivery Fee</string>
+    <string name="to_pay">To Pay</string>
+    <string name="place_order">Place Order</string>
+    <string name="edit_address">Edit Address</string>
+    <string name="name">Name</string>
+    <string name="address">Address</string>
+    <string name="save">Save</string>
+    <string name="phone_number">Phone number</string>
+    <string name="send_otp">Send OTP</string>
+    <string name="search">Search</string>
+    <string name="cart">Cart</string>
+    <string name="profile">Profile</string>
+    <string name="manage_address">Manage Address</string>
+    <string name="add_new_address">Add New Address</string>
+    <string name="edit_profile">Edit Profile</string>
+    <string name="pin_code">PIN Code</string>
+    <string name="order_placed">Order Placed!</string>
+    <string name="track_order">Track Order</string>
+    <string name="shop_name">Shop Name</string>
+    <string name="order_confirmed">Order Confirmed</string>
+    <string name="your_order_is_confirmed">Your Order is confirmed</string>
+    <string name="out_for_delivery">Out for delivery</string>
+    <string name="your_order_is_on_the_way">Your order is on the way</string>
+    <string name="order_delivered">Order Delivered</string>
+    <string name="your_order_is_delivered">Your order is delivered</string>
+    <string name="order_cancelled">Order Cancelled</string>
+    <string name="your_order_is_cancelled">Your order is cancelled</string>
+    <string name="total">Total</string>
+    <string name="reorder">Reorder</string>
+    <string name="my_orders">My Orders</string>
+    <string name="cancel">CANCEL</string>
+
     <string-array name="fruits_and_vegetables">
         <item>Fresh Vegetables</item>
         <item>Fresh Fruits</item>

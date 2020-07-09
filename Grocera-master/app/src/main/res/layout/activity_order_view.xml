@@ -49,7 +49,7 @@
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="Track Order"
+                            android:text="@string/track_order"
                             android:textColor="@android:color/black"
                             android:textSize="19sp"
                             android:textStyle="bold"
@@ -112,7 +112,7 @@
                                 android:id="@+id/shop_name"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:text="Shop Name"
+                                android:text="@string/shop_name"
                                 android:textColor="@android:color/black"
                                 android:textSize="18sp"
                                 android:textAlignment="textStart"
@@ -123,7 +123,7 @@
                             <TextView
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:text="Order Placed"
+                                android:text="@string/order_placed"
                                 android:textColor="@android:color/black"
                                 android:textSize="17sp"
                                 android:textAlignment="textStart"
@@ -161,7 +161,7 @@
                             <TextView
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:text="Order Confirmed"
+                                android:text="@string/order_confirmed"
                                 android:textColor="@android:color/black"
                                 android:textSize="18sp"
                                 android:textAlignment="textStart"
@@ -172,7 +172,7 @@
                             <TextView
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:text="Your Order is confirmed"
+                                android:text="@string/your_order_is_confirmed"
                                 android:textColor="@android:color/black"
                                 android:textSize="17sp"
                                 android:textAlignment="textStart"
@@ -208,7 +208,7 @@
                             <TextView
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:text="Out for delivery"
+                                android:text="@string/out_for_delivery"
                                 android:textColor="@android:color/black"
                                 android:textSize="18sp"
                                 android:textAlignment="textStart"
@@ -219,7 +219,7 @@
                             <TextView
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:text="Your order is on the way"
+                                android:text="@string/your_order_is_on_the_way"
                                 android:textColor="@android:color/black"
                                 android:textSize="18sp"
                                 android:textAlignment="textStart"
@@ -255,7 +255,7 @@
                             <TextView
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:text="Order Delivered"
+                                android:text="@string/order_delivered"
                                 android:textColor="@android:color/black"
                                 android:textSize="18sp"
                                 android:textAlignment="textStart"
@@ -266,7 +266,7 @@
                             <TextView
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:text="Your order is delivered"
+                                android:text="@string/your_order_is_delivered"
                                 android:textColor="@android:color/black"
                                 android:textSize="18sp"
                                 android:textAlignment="textStart"
@@ -301,7 +301,7 @@
                             <TextView
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:text="Order Cancelled"
+                                android:text="@string/order_cancelled"
                                 android:textColor="@android:color/black"
                                 android:textSize="18sp"
                                 android:textAlignment="textStart"
@@ -312,7 +312,7 @@
                             <TextView
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:text="Your order is cancelled"
+                                android:text="@string/your_order_is_cancelled"
                                 android:textColor="@android:color/black"
                                 android:textSize="18sp"
                                 android:textAlignment="textStart"
@@ -344,7 +344,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="18dp"
-                        android:text="Bill Details"
+                        android:text="@string/bill_details"
                         android:textColor="@android:color/black"
                         android:paddingStart="12dp"/>
 
@@ -374,7 +374,7 @@
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="Item Total"
+                            android:text="@string/item_total"
                             android:paddingStart="12dp"
                             android:paddingEnd="12dp"
                             android:textColor="@android:color/black"
@@ -400,7 +400,7 @@
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="Item Discount"
+                            android:text="@string/item_discount"
                             android:paddingStart="12dp"
                             android:paddingEnd="12dp"
                             android:textColor="@color/colorPrimaryDark"
@@ -426,7 +426,7 @@
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="Delivery Fee"
+                            android:text="@string/delivery_fee"
                             android:paddingStart="12dp"
                             android:paddingEnd="12dp"
                             android:textColor="@android:color/black"
@@ -458,7 +458,7 @@
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="Total"
+                            android:text="@string/total"
                             android:paddingStart="12dp"
                             android:paddingEnd="12dp"
                             android:textColor="@android:color/black"
@@ -494,7 +494,7 @@
         android:layout_alignParentStart="true"
         android:background="@color/colorPrimary"
         android:minHeight="56dp"
-        android:text="Reorder"
+        android:text="@string/reorder"
         android:textColor="@android:color/white"
         android:textSize="15dp" />
 
