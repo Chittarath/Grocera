@@ -40,6 +40,20 @@
     <string name="reorder">Reorder</string>
     <string name="my_orders">My Orders</string>
     <string name="cancel">CANCEL</string>
+    <string name="view_cart">View Cart</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="register_with_email">Register with email</string>
+    <string name="forgot_password">Forgot Password?</string>
+    <string name="already_have_an_account">Already have an Account?</string>
+    <string name="my_cart">My Cart</string>
+    <string name="sort_filter">Sort/Filter</string>
+    <string name="cannot_find">Oops! Cannot find any grocery shop :( \n Please, Check if laocation services are off</string>
+    <string name="help">help</string>
+    <string name="stores">Stores</string>
+    <string name="products">Products</string>
+    <string name="cash_on_delivery">Cash on Delivery</string>
+    <string name="online">Online</string>
+    <string name="product_name">Product Name</string>
 
     <string-array name="fruits_and_vegetables">
         <item>Fresh Vegetables</item>

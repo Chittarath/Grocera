@@ -34,7 +34,7 @@
             android:id="@+id/item_product_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Name"
+            android:text="@string/name"
             android:textColor="@color/colorPrimary"
             android:textSize="15sp"
             android:textStyle="bold"
@@ -51,7 +51,7 @@
             android:paddingEnd="12dp"
             android:layout_marginEnd="12dp"
             android:text="30 Left"
-            android:textSize="22dp"
+            android:textSize="22sp"
             android:visibility="gone"/>
 
         <TextView
@@ -85,7 +85,7 @@
             android:layout_height="25dp"
             android:layout_gravity="center"
             android:layout_marginBottom="5dp"
-            android:text="Add"
+            android:text="@string/add"
             android:background="@drawable/rounded_btn"
             android:textColor="@android:color/white"
             android:textSize="15sp"/>

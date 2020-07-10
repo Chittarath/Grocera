@@ -22,7 +22,7 @@
             android:textStyle="bold"
             android:layout_margin="12dp"
             android:textColor="@android:color/black"
-            android:text="Sign Up"/>
+            android:text="@string/sign_up"/>
 
         <EditText
             android:id="@+id/signup_display_name"
@@ -30,7 +30,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="12dp"
             android:background="@android:color/white"
-            android:hint="Name"
+            android:hint="@string/name"
             android:inputType="textCapWords"
             android:maxLines="1"
             android:padding="18dp"
@@ -46,7 +46,7 @@
             android:id="@+id/reset_email"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Email"
+            android:hint="@string/email"
             android:inputType="textEmailAddress"
             android:maxLines="1"
             android:padding="18dp"
@@ -63,7 +63,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:focusableInTouchMode="true"
-            android:hint="Password"
+            android:hint="@string/password_text"
             android:inputType="textPassword"
             android:maxLines="1"
             android:padding="18dp"
@@ -75,7 +75,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:focusableInTouchMode="true"
-            android:hint="PIN Code"
+            android:hint="@string/pin_code"
             android:inputType="number"
             android:maxLines="1"
             android:padding="18dp"
@@ -87,7 +87,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:focusableInTouchMode="true"
-            android:hint="Mobile"
+            android:hint="@string/phone_number"
             android:inputType="phone"
             android:maxLines="1"
             android:padding="18dp"
@@ -114,7 +114,7 @@
             android:layout_marginBottom="45dp"
             android:background="@drawable/cool_gradient"
             android:minHeight="56dp"
-            android:text="Register with email"
+            android:text="@string/register_with_email"
             android:textColor="@android:color/white"
             android:textStyle="bold"/>
 
@@ -124,7 +124,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:background="@null"
-            android:text="Forgot Password?"
+            android:text="@string/forgot_password"
             android:textAllCaps="false"
             android:textColor="@color/colorPrimary" />
 
@@ -136,7 +136,7 @@
             android:layout_alignParentBottom="true"
             android:layout_gravity="center"
             android:background="@null"
-            android:text="Already have an Account?"
+            android:text="@string/already_have_an_account"
             android:textAllCaps="false"
             android:textColor="@color/colorPrimary"
             android:textSize="15sp"
