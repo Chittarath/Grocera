@@ -44,7 +44,7 @@ public class LoginActivity extends AppCompatActivity {
 
     private EditText inputPhone, firstCharOTP, secondCharOTP, thirdCharOTP, fourthCharOTP, fifthCharOTP, sixthCharOTP;
     LinearLayout inputCode; //Input Code is made of 4 EditTextView contained inside a LinearLayout
-    TextView verifyPhoneBtn, verifyOTP;
+    TextView verifyPhoneBtn, verifyOTP, resendOTP;
     String codeSent;
     ImageView userImg;
 
@@ -78,6 +78,7 @@ public class LoginActivity extends AppCompatActivity {
         fourthCharOTP = findViewById(R.id.fourth_char_otp);
         fifthCharOTP = findViewById(R.id.fifth_char_otp);
         sixthCharOTP = findViewById(R.id.sixth_char_otp);
+        resendOTP = findViewById(R.id.resend_otp);
 
         firstCharOTP.addTextChangedListener(new OTPTextWatcher(firstCharOTP));
         secondCharOTP.addTextChangedListener(new OTPTextWatcher(secondCharOTP));
@@ -91,6 +92,7 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 inputCode.setVisibility(View.VISIBLE);
+                resendOTP.setVisibility(View.VISIBLE);
                 if (!inputPhone.getText().toString().startsWith("+91"))
                     inputPhone.setText(String.format("+91%s", inputPhone.getText().toString()));
                 sendVerificationCode();
@@ -98,6 +100,16 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
         //OTP sent
+
+        resendOTP.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (!inputPhone.getText().toString().startsWith("+91"))
+                    inputPhone.setText(String.format("+91%s", inputPhone.getText().toString()));
+                sendVerificationCode();
+                closeKeyboard();
+            }
+        });
 
         verifyOTP.setOnClickListener(new View.OnClickListener() {
             @Override

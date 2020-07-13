@@ -54,6 +54,8 @@
     <string name="cash_on_delivery">Cash on Delivery</string>
     <string name="online">Online</string>
     <string name="product_name">Product Name</string>
+    <string name="verify_otp">Verify OTP</string>
+    <string name="resend_otp">Resend OTP</string>
 
     <string-array name="fruits_and_vegetables">
         <item>Fresh Vegetables</item>

@@ -62,7 +62,7 @@ public class ProfileFragment extends Fragment {
         logout = view.findViewById(R.id.profile_view_logout_btn);
         manageAddressBtn = view.findViewById(R.id.profile_view_manage_address_btn);
         helpbtn=view.findViewById(R.id.profile_view_help_btn);
-        userinfo=view.findViewById(R.id.user_profile);
+        //userinfo=view.findViewById(R.id.user_profile);
         Button myordersBtn = view.findViewById(R.id.my_orders);
 
         myordersBtn.setOnClickListener(new View.OnClickListener() {
