@@ -1,0 +1,167 @@
+<resources>
+    <string name="app_name">Grocera</string>
+        <string name="title_home">घर</string>
+    <string name="title_dashboard">डैशबोर्ड</string>
+    <string name="title_notifications">सूचनाएं</string>
+    <string name="checkout">चेक आउट</string>
+    <string name="select_address">पता चुनें</string>
+    <string name="select_payment_method">भुगतान का तरीका चुनें</string>
+    <string name="bill_details">बिल का विवरण</string>
+    <string name="item_total">कुल लागत</string>
+    <string name="item_discount">छूट</string>
+    <string name="delivery_fee">अर्पण शुल्क</string>
+    <string name="to_pay">भुगतान करने के लिए</string>
+    <string name="place_order">ऑर्डर देना</string>
+    <string name="edit_address">पता संपादित करें</string>
+    <string name="name">नाम</string>
+    <string name="address">पता</string>
+    <string name="save">सहेजें</string>
+    <string name="phone_number">फ़ोन नंबर</string>
+    <string name="send_otp">OTP भेजें</string>
+    <string name="search">खोज</string>
+    <string name="cart">शॉपिंग कार्ट</string>
+    <string name="profile">प्रोफ़ाइल</string>
+    <string name="manage_address">पता प्रबंधित करें</string>
+    <string name="add_new_address">नया पता जोड़ें</string>
+    <string name="edit_profile">प्रोफ़ाइल संपादित करें</string>
+    <string name="pin_code">पिन कोड</string>
+    <string name="order_placed">ऑर्डर रखा!</string>
+    <string name="track_order">ऑर्डर पर नज़र रखें</string>
+    <string name="shop_name">दुकान का नाम</string>
+    <string name="order_confirmed">ऑर्डर की पुष्टि की गई</string>
+    <string name="your_order_is_confirmed">आपका ऑर्डर पक्का है</string>
+    <string name="out_for_delivery">डिलिवरी के लिए रवाना</string>
+    <string name="your_order_is_on_the_way">आपका पैकेज रास्ते में है</string>
+    <string name="order_delivered">ऑर्डर पहुंचा दिया</string>
+    <string name="your_order_is_delivered">आपका ऑर्डर दिया गया है</string>
+    <string name="order_cancelled">ऑर्डर रद्द</string>
+    <string name="your_order_is_cancelled">आपका ऑर्डर रद्द कर दिया गया है</string>
+    <string name="total">संपूर्ण रकम</string>
+    <string name="reorder">पुनः ऑर्डर दें</string>
+    <string name="my_orders">मेरे ऑर्डर</string>
+    <string name="cancel">रद्द करना</string>
+    <string name="view_cart">गाडी देंखे</string>
+    <string name="sign_up">साइन अप करें</string>
+    <string name="register_with_email">ईमेल के साथ रजिस्टर</string>
+    <string name="forgot_password">पासवर्ड भूल गए?</string>
+    <string name="already_have_an_account">क्या आपके पास पहले से एक खाता मौजूद है?</string>
+    <string name="my_cart">मेरी गाड़ी</string>
+    <string name="sort_filter">क्रमबद्ध/फ़िल्टर करें</string>
+    <string name="cannot_find">किसी भी किराने की दुकान नहीं मिल सकती \n कृपया, जांचें कि क्या लाहन की सेवाएं बंद हैं</string>
+    <string name="help">मदद</string>
+    <string name="stores">स्टोर</string>
+    <string name="products">उत्पाद</string>
+    <string name="cash_on_delivery">डिलवरी पर नकदी</string>
+    <string name="online">ऑनलाइन</string>
+    <string name="product_name">उत्पाद का नाम</string>
+    <string name="verify_otp">OTP को सत्यापित करें</string>
+    <string name="resend_otp">ओटीपी पुनः भेजें</string>
+
+    <string-array name="fruits_and_vegetables">
+        <item>Fresh Vegetables</item>
+        <item>Fresh Fruits</item>
+        <item>Herbs and Seasoning</item>
+    </string-array>
+
+    <string-array name="foodgrains">
+        <item>Atta, Flours and Souji</item>
+        <item>Rice and Rice Products</item>
+        <item>Dal and Pulses</item>
+        <item>Salt, Sugar and Jaggery</item>
+        <item>Edible oils and ghee</item>
+        <item>Masala and Spices</item>
+        <item>Dry Fruits</item>
+    </string-array>
+
+    <string-array name="bakery">
+        <item>Dairy</item>
+        <item>Breads and Buns</item>
+        <item>Cookies, Rusk and Khari</item>
+        <item>Ice creams and Deserts</item>
+        <item>Cakes and Pastries</item>
+        <item>Bakery Snacks</item>
+    </string-array>
+
+    <string-array name="snacks">
+        <item>Breakfast Cereals</item>
+        <item>Noodles and Pasta</item>
+        <item>Biscuits and Cookies</item>
+        <item>Frozen Veggies and Snacks</item>
+        <item>Snacks, Sauces and Ketchup</item>
+        <item>Ready to cook and eat</item>
+        <item>Chocolate and Candies</item>
+        <item>Pickels and Candies</item>
+        <item>Indian Sweets</item>
+    </string-array>
+
+    <string-array name="beauty">
+        <item>Oral Care</item>
+        <item>Feminine Hygiene</item>
+        <item>Bath and Hand Wash</item>
+        <item>Health and Medicine</item>
+        <item>Men Grooming</item>
+        <item>Skin Care</item>
+        <item>Fragrences and Deos</item>
+        <item>Make up</item>
+    </string-array>
+
+    <string-array name="cleaning">
+        <item>Detergents and Dishwash</item>
+        <item>All Purpose Cleaners</item>
+        <item>Disposable, Garbage Bags</item>
+        <item>Freshners and Repellents</item>
+        <item>Mops, Brushes and Scrubs</item>
+        <item>Bins and Bathroom Ware</item>
+        <item>Pooja Needs</item>
+        <item>Party and Festive Needs</item>
+        <item>Car and Show Care</item>
+        <item>Stationary</item>
+    </string-array>
+
+    <string-array name="kitchen">
+        <item>Pet Food and Accessories</item>
+        <item>Cookware and Non stick</item>
+        <item>Appliances and Electricals</item>
+        <item>Steel Utensils</item>
+        <item>Kitchen Accessories</item>
+        <item>Storage Accessories</item>
+        <item>Bakeware</item>
+        <item>Gardening</item>
+    </string-array>
+
+    <string-array name="eggs">
+        <item>Eggs</item>
+        <item>Marinades</item>
+        <item>Poultry</item>
+        <item>Mutton and Lamb</item>
+        <item>Fish and Seafood</item>
+        <item>Pork</item>
+    </string-array>
+
+    <string-array name="baby_care">
+        <item>Baby Food and Formula</item>
+        <item>Diapers and Wipes</item>
+        <item>Baby Bath and Hygiene</item>
+        <item>Mothers and Maternity</item>
+        <item>Feeding and Nursing</item>
+        <item>Baby Accessories</item>
+    </string-array>
+</resources>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
