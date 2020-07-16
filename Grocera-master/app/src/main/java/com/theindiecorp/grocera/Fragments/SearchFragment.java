@@ -47,7 +47,7 @@ public class SearchFragment extends Fragment {
 
         final android.widget.SearchView searchView = view.findViewById(R.id.fragment_search_search_bar);
 
-        searchView.setQueryHint("Search");
+        searchView.setQueryHint(getResources().getString(R.string.search));
         searchView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

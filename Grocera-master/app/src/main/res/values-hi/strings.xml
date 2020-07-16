@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">Grocera</string>
-        <string name="title_home">घर</string>
+    <string name="title_home">घर</string>
     <string name="title_dashboard">डैशबोर्ड</string>
     <string name="title_notifications">सूचनाएं</string>
     <string name="checkout">चेक आउट</string>
@@ -58,93 +58,93 @@
     <string name="resend_otp">ओटीपी पुनः भेजें</string>
 
     <string-array name="fruits_and_vegetables">
-        <item>Fresh Vegetables</item>
-        <item>Fresh Fruits</item>
-        <item>Herbs and Seasoning</item>
+        <item>ताज़ी सब्जियां</item>
+        <item>ताजा फल</item>
+        <item>जड़ी बूटी और मसाला</item>
     </string-array>
 
     <string-array name="foodgrains">
-        <item>Atta, Flours and Souji</item>
-        <item>Rice and Rice Products</item>
-        <item>Dal and Pulses</item>
-        <item>Salt, Sugar and Jaggery</item>
-        <item>Edible oils and ghee</item>
-        <item>Masala and Spices</item>
-        <item>Dry Fruits</item>
+        <item>अट्टा और सूजी</item>
+        <item>चावल और चावल उत्पाद</item>
+        <item>दाल और दालें</item>
+        <item>नमक, चीनी और गुड़</item>
+        <item>खाद्य तेल और घी</item>
+        <item>मसाले</item>
+        <item>सूखा फल</item>
     </string-array>
 
     <string-array name="bakery">
-        <item>Dairy</item>
-        <item>Breads and Buns</item>
-        <item>Cookies, Rusk and Khari</item>
-        <item>Ice creams and Deserts</item>
-        <item>Cakes and Pastries</item>
-        <item>Bakery Snacks</item>
+        <item>दुग्धालय</item>
+        <item>ब्रेड्स और बन्स</item>
+        <item>कुकीज़, रस्क और खारी</item>
+        <item>आइस क्रीम और रेगिस्तान</item>
+        <item>केक और पेस्ट्री</item>
+        <item>बेकरी स्नैक्स</item>
     </string-array>
 
     <string-array name="snacks">
-        <item>Breakfast Cereals</item>
-        <item>Noodles and Pasta</item>
-        <item>Biscuits and Cookies</item>
-        <item>Frozen Veggies and Snacks</item>
-        <item>Snacks, Sauces and Ketchup</item>
-        <item>Ready to cook and eat</item>
-        <item>Chocolate and Candies</item>
-        <item>Pickels and Candies</item>
-        <item>Indian Sweets</item>
+        <item>नाश्ता का अनाज</item>
+        <item>नूडल्स और पास्ता</item>
+        <item>बिस्कुट और कुकीज़</item>
+        <item>फ्रोजन वेजी और स्नैक्स</item>
+        <item>स्नैक्स, सॉस और केचप</item>
+        <item>पकाने और खाने के लिए तैयार</item>
+        <item>चॉकलेट और कैंडी</item>
+        <item>अचार और कैंडी</item>
+        <item>मीठा</item>
     </string-array>
 
     <string-array name="beauty">
-        <item>Oral Care</item>
-        <item>Feminine Hygiene</item>
-        <item>Bath and Hand Wash</item>
-        <item>Health and Medicine</item>
-        <item>Men Grooming</item>
-        <item>Skin Care</item>
-        <item>Fragrences and Deos</item>
-        <item>Make up</item>
+        <item>मुंह की देखभाल</item>
+        <item>स्त्री स्वच्छता</item>
+        <item>स्नान और हाथ धोना</item>
+        <item>स्वास्थ्य और चिकित्सा</item>
+        <item>पुरुषों को संवारना</item>
+        <item>त्वचा की देखभाल</item>
+        <item>सुगंध और दोष</item>
+        <item>शृंगार</item>
     </string-array>
 
     <string-array name="cleaning">
-        <item>Detergents and Dishwash</item>
-        <item>All Purpose Cleaners</item>
-        <item>Disposable, Garbage Bags</item>
-        <item>Freshners and Repellents</item>
-        <item>Mops, Brushes and Scrubs</item>
-        <item>Bins and Bathroom Ware</item>
-        <item>Pooja Needs</item>
-        <item>Party and Festive Needs</item>
-        <item>Car and Show Care</item>
-        <item>Stationary</item>
+        <item>डिटर्जेंट और डिशवॉश</item>
+        <item>सभी उद्देश्य क्लीनर</item>
+        <item>डिस्पोजेबल, कचरा बैग</item>
+        <item>फ्रेशर्स और रिपेलेंट्स</item>
+        <item>ब्रश और स्क्रब</item>
+        <item>डिब्बे और बाथरूम वेयर</item>
+        <item>पूजा की जरूरत</item>
+        <item>पार्टी और उत्सव की जरूरतें</item>
+        <item>कार और शो केयर</item>
+        <item>स्थावर</item>
     </string-array>
 
     <string-array name="kitchen">
-        <item>Pet Food and Accessories</item>
-        <item>Cookware and Non stick</item>
-        <item>Appliances and Electricals</item>
-        <item>Steel Utensils</item>
-        <item>Kitchen Accessories</item>
-        <item>Storage Accessories</item>
-        <item>Bakeware</item>
-        <item>Gardening</item>
+        <item>पालतू भोजन और सहायक उपकरण</item>
+        <item>कुकवेयर और नॉन स्टिक</item>
+        <item>उपकरण और इलेक्ट्रिकल्स</item>
+        <item>स्टील के बर्तन</item>
+        <item>रसोई की सहायक सामग्री</item>
+        <item>भंडारण सहायक उपकरण</item>
+        <item>बेकवेयर</item>
+        <item>बागवानी</item>
     </string-array>
 
     <string-array name="eggs">
-        <item>Eggs</item>
-        <item>Marinades</item>
-        <item>Poultry</item>
-        <item>Mutton and Lamb</item>
-        <item>Fish and Seafood</item>
-        <item>Pork</item>
+        <item>अंडे</item>
+        <item>मैरिनड</item>
+        <item>मुर्गी पालन</item>
+        <item>मटन और मेम्ने</item>
+        <item>मछली और समुद्री भोजन</item>
+        <item>सुअर का मांस</item>
     </string-array>
 
     <string-array name="baby_care">
-        <item>Baby Food and Formula</item>
-        <item>Diapers and Wipes</item>
-        <item>Baby Bath and Hygiene</item>
-        <item>Mothers and Maternity</item>
-        <item>Feeding and Nursing</item>
-        <item>Baby Accessories</item>
+        <item>बेबी फूड और फॉर्मूला</item>
+        <item>डायपर और वाइप्स</item>
+        <item>बेबी स्नान और स्वच्छता</item>
+        <item>माता और मातृत्व</item>
+        <item>खिला और नर्सिंग</item>
+        <item>बेबी सहायक उपकरण</item>
     </string-array>
 </resources>
 

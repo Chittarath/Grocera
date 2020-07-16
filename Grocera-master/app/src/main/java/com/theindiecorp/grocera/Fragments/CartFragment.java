@@ -69,13 +69,13 @@ public class CartFragment extends Fragment {
                     checkoutBtn.setVisibility(View.GONE);
                     itemTotal.setVisibility(View.GONE);
                     emptyCartText.setVisibility(View.VISIBLE);
-                    myCartTxt.setText("My Cart");
+                    myCartTxt.setText(getResources().getString(R.string.my_cart));
                 }
                 else{
                     itemTotal.setVisibility(View.VISIBLE);
                     checkoutBtn.setVisibility(View.VISIBLE);
                     emptyCartText.setVisibility(View.GONE);
-                    myCartTxt.setText("My Cart (" + cart.size() + ")");
+                    myCartTxt.setText(getResources().getString(R.string.my_cart) + "(" + cart.size() + ")");
                 }
                 calculateTotal(cart);
                 totalAmountTv.setText("Rs." + total);
@@ -104,7 +104,7 @@ public class CartFragment extends Fragment {
         databaseReference.child("users").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                pinCodeTxt.setText("Pin code : " + dataSnapshot.child("pinCode").getValue(String.class));
+                pinCodeTxt.setText(getResources().getString(R.string.pin_code) + dataSnapshot.child("pinCode").getValue(String.class));
             }
 
             @Override

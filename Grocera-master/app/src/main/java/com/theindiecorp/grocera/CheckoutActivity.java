@@ -211,7 +211,7 @@ public class CheckoutActivity extends AppCompatActivity implements PaymentResult
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         if(PAYMENT_TYPE.isEmpty()){
-                            Toast.makeText(CheckoutActivity.this,"Please select a payment method",Toast.LENGTH_SHORT).show();
+                            Toast.makeText(CheckoutActivity.this,getResources().getString(R.string.select_payment_method),Toast.LENGTH_SHORT).show();
                             return;
                         }
                         if(Address == null){
